@@ -1,0 +1,6 @@
+{
+  "name": "Nu Health Care Diagnostic",
+  "description": "Group's of Nu Health Care Diagnostic - NABL-accredited diagnostic center offering advanced 3T MRI, 128-Slice CT, 4D Ultrasound, automated pathology, and home sample collection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
