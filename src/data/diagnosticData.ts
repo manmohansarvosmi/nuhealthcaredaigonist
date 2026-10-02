@@ -787,15 +787,15 @@ export const DIAGNOSTIC_CENTERS: DiagnosticCenter[] = [
     tag: 'Primary Diagnostic & Digital X-Ray Center',
     address: 'In State Bank Building, Beside Civil Hospital',
     city: 'Dabra, Madhya Pradesh',
-    phone: '096176 59936',
-    hours: 'Open 24 Hours · 7 Days a Week',
+    phone: '99778 33679, 80853 67924',
+    hours: '08:30 AM - 09:00 PM (Daily)',
     facilities: [
       'Automated Pathology & Biochemistry Lab',
       'High-Frequency Digital X-Ray',
       '12-Lead Computerized ECG',
       'Special Radiological Studies (IVP, Barium, HSG)',
       'Free Home & Hospital Sample Collection',
-      '24x7 Emergency Testing'
+      'Emergency Lab Testing'
     ],
     emergencyAvailable: true,
     parkingAvailable: true,
@@ -806,8 +806,8 @@ export const DIAGNOSTIC_CENTERS: DiagnosticCenter[] = [
     tag: 'Diagnostic & Pathology Center',
     address: 'Opposite Kamaksha Devi Temple, Near New Tehsil',
     city: 'Karera, Madhya Pradesh',
-    phone: '096176 59936',
-    hours: '06:30 AM - 09:30 PM (Daily)',
+    phone: '80853 67924, 99778 33679',
+    hours: '08:30 AM - 09:00 PM (Daily)',
     facilities: [
       'Fully Automated Blood Pathology',
       'Digital X-Ray & 12-Lead ECG',
@@ -848,7 +848,7 @@ export const ACCREDITATIONS = [
 export const PATIENT_FAQS = [
   {
     q: 'How does Nu Health Care Free Home Sample Collection service work?',
-    a: 'To book a home or hospital sample collection, select your desired tests online or call/WhatsApp our 24x7 helpline at 096176 59936. Our certified technician arrives at your preferred time equipped with sterile vacuum tubes and a cold-chain kit to collect samples safely.'
+    a: 'To book a home or hospital sample collection, select your desired tests online or call/WhatsApp our 24x7 helplines at 99778 33679 / 80853 67924. Our certified technician arrives at your preferred time equipped with sterile vacuum tubes and a cold-chain kit to collect samples safely.'
   },
   {
     q: 'What are the fasting guidelines for blood tests like Lipid, LFT and Glucose?',

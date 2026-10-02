@@ -1,5 +1,5 @@
 import React from 'react';
-import { Phone, Mail, MapPin, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, MapPin, ShieldCheck, Heart, Clock } from 'lucide-react';
 import { NuHealthcareLogo } from './NuHealthcareLogo';
 
 interface FooterProps {
@@ -35,14 +35,31 @@ export const Footer: React.FC<FooterProps> = ({
               <span>NABL (ISO 15189:2022) Certified · ICMR Registered</span>
             </div>
 
-            <div className="space-y-1.5 pt-2 font-mono text-[11px] text-slate-300">
-              <div className="flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-[#D32F2F]" />
-                <a href="tel:+919617659936" className="hover:text-white transition-colors font-bold">
-                  24x7 Helpline: 096176 59936
-                </a>
+            <div className="space-y-2 pt-2 font-mono text-[11px] text-slate-300">
+              {/* Highlighted Helpline Box */}
+              <div className="bg-orange-950/60 border border-orange-500/40 rounded-lg px-3 py-2 text-white">
+                <div className="flex items-center gap-2 mb-1">
+                  <Phone className="w-3.5 h-3.5 text-[#F37920] animate-pulse" />
+                  <span className="text-[#F37920] font-bold text-xs">Direct Helplines (24x7):</span>
+                </div>
+                <div className="text-sm font-bold text-white flex items-center gap-2 flex-wrap">
+                  <a href="tel:+919977833679" className="hover:text-[#F37920] transition-colors underline decoration-orange-400 underline-offset-2">
+                    99778 33679
+                  </a>
+                  <span className="text-slate-500">/</span>
+                  <a href="tel:+918085367924" className="hover:text-[#F37920] transition-colors underline decoration-orange-400 underline-offset-2">
+                    80853 67924
+                  </a>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
+
+              {/* Highlighted Timing Box */}
+              <div className="bg-slate-900/90 border border-sky-500/40 rounded-lg px-3 py-1.5 flex items-center gap-2 text-sky-200">
+                <Clock className="w-3.5 h-3.5 text-sky-400" />
+                <span className="font-semibold text-xs">Center Timing: <strong className="text-white">08:30 AM – 09:00 PM (Daily)</strong></span>
+              </div>
+
+              <div className="flex items-center gap-2 pt-1 text-slate-400">
                 <Mail className="w-3.5 h-3.5 text-[#F37920]" />
                 <span>care@nuhealthcarediagnostic.com</span>
               </div>

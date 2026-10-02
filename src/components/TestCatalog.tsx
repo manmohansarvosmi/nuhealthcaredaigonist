@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search, Clock, AlertCircle, Plus, Check, Info, X, Sparkles, Home, ShieldCheck } from 'lucide-react';
 import { DIAGNOSTIC_TESTS } from '../data/diagnosticData';
 import { DiagnosticTest, TestCategory, CartItem } from '../types';
+import { TestThumbnail } from './TestThumbnail';
 
 interface TestCatalogProps {
   cart: CartItem[];
@@ -157,49 +158,51 @@ export const TestCatalog: React.FC<TestCatalogProps> = ({
 
         {/* Dense 4-Column Tests Grid */}
         {filteredTests.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3.5">
             {filteredTests.map((test) => {
               const inCart = isInCart(test.id);
 
               return (
                 <div
                   key={test.id}
-                  className="bg-white rounded-xl border border-slate-200 p-3.5 flex flex-col justify-between hover:border-orange-300 hover:shadow-xs transition-all duration-150 group"
+                  className="bg-white rounded-xl border border-slate-200/90 p-3 sm:p-3.5 flex flex-col justify-between hover:border-orange-300 hover:shadow-md transition-all duration-200 group"
                 >
-                  <div className="space-y-1.5">
-                    
-                    {/* Top Metadata Strip */}
-                    <div className="flex items-center justify-between text-[11px] text-slate-500 font-mono">
-                      <span className="font-bold text-[#0066B2] bg-blue-50 px-1.5 py-0.5 rounded text-[10px]">
-                        {test.sampleType}
-                      </span>
-                      <span className="flex items-center gap-0.5 text-[10px] text-slate-500">
-                        <Clock className="w-2.5 h-2.5 text-slate-400" />
-                        {test.turnaroundTime}
-                      </span>
-                    </div>
+                  <div className="flex items-start gap-2.5">
+                    {/* 3D Realistic Image Thumbnail */}
+                    <TestThumbnail testId={test.id} category={test.category} className="w-14 h-14 sm:w-16 sm:h-16 shrink-0" />
 
-                    {/* Test Title */}
-                    <div>
-                      <h3 className="text-sm font-bold text-slate-900 leading-snug font-display group-hover:text-[#E86A17] transition-colors line-clamp-2">
+                    <div className="flex-1 min-w-0 space-y-1">
+                      {/* Top Metadata Strip */}
+                      <div className="flex items-center justify-between text-[10px] text-slate-500 font-mono">
+                        <span className="font-bold text-[#0066B2] bg-blue-50 px-1.5 py-0.5 rounded text-[10px]">
+                          {test.sampleType}
+                        </span>
+                        <span className="flex items-center gap-0.5 text-[10px] text-slate-500">
+                          <Clock className="w-2.5 h-2.5 text-slate-400" />
+                          {test.turnaroundTime}
+                        </span>
+                      </div>
+
+                      {/* Test Title */}
+                      <h3 className="text-xs sm:text-[13px] font-bold text-slate-900 leading-snug font-display group-hover:text-[#E86A17] transition-colors line-clamp-2">
                         {test.name}
                       </h3>
-                    </div>
 
-                    {/* Fasting Requirement Note */}
-                    <div className="text-[10px] text-slate-500 flex items-center gap-1 pt-0.5">
-                      <AlertCircle className={`w-3 h-3 shrink-0 ${test.fastingRequired ? 'text-[#D32F2F]' : 'text-slate-400'}`} />
-                      <span className={test.fastingRequired ? 'font-semibold text-red-800' : ''}>
-                        {test.fastingRequired ? `${test.fastingHours || 8}h Fasting` : 'No Fasting'}
-                      </span>
+                      {/* Fasting Requirement Note */}
+                      <div className="text-[10px] text-slate-500 flex items-center gap-1 pt-0.5">
+                        <AlertCircle className={`w-3 h-3 shrink-0 ${test.fastingRequired ? 'text-[#D32F2F]' : 'text-slate-400'}`} />
+                        <span className={test.fastingRequired ? 'font-semibold text-red-700' : 'text-slate-500'}>
+                          {test.fastingRequired ? `${test.fastingHours || 8}h Fasting` : 'No Fasting'}
+                        </span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Clean Action Strip Without Price */}
+                  {/* Clean Action Strip */}
                   <div className="pt-2.5 mt-2.5 border-t border-slate-100 flex items-center justify-between gap-1.5">
                     <button
                       onClick={() => setActiveModalTest(test)}
-                      className="text-[10px] font-bold text-[#E86A17] hover:text-[#c4530b] flex items-center gap-0.5 cursor-pointer bg-orange-50 hover:bg-orange-100 px-2 py-1 rounded border border-orange-200/60 transition-colors"
+                      className="text-[11px] font-bold text-[#E86A17] hover:text-[#c4530b] flex items-center gap-1 cursor-pointer bg-orange-50/80 hover:bg-orange-100 px-2.5 py-1 rounded-lg border border-orange-200/80 transition-colors"
                     >
                       <Info className="w-3 h-3" />
                       <span>Details</span>
@@ -221,7 +224,7 @@ export const TestCatalog: React.FC<TestCatalogProps> = ({
 
                       <button
                         onClick={() => onBookDirect(test)}
-                        className="px-2.5 py-1 bg-[#F37920] hover:bg-[#D9620E] text-white rounded-md text-[11px] font-bold transition-colors whitespace-nowrap cursor-pointer shadow-2xs"
+                        className="px-3 py-1 bg-[#F37920] hover:bg-[#D9620E] text-white rounded-lg text-xs font-bold transition-colors whitespace-nowrap cursor-pointer shadow-2xs"
                       >
                         Book
                       </button>

@@ -2,6 +2,7 @@ import React from 'react';
 import { Sparkles, Calendar, Clock, AlertCircle, ArrowRight, CheckCircle2, ShieldCheck, Activity } from 'lucide-react';
 import { DIAGNOSTIC_TESTS } from '../data/diagnosticData';
 import { DiagnosticTest } from '../types';
+import { TestThumbnail } from './TestThumbnail';
 
 interface SpecialProceduresSectionProps {
   onBookProcedure: (test: DiagnosticTest) => void;
@@ -54,20 +55,23 @@ export const SpecialProceduresSection: React.FC<SpecialProceduresSectionProps> =
                   </div>
                 </div>
 
-                {/* Procedure Title */}
-                <div>
-                  <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0066B2] transition-colors font-display">
-                    {proc.name}
-                  </h3>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="text-[10px] font-semibold text-[#0066B2] bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
-                      {proc.sampleType}
-                    </span>
-                    {proc.fastingRequired && (
-                      <span className="text-[10px] font-semibold text-[#D32F2F] bg-red-50 px-2 py-0.5 rounded border border-red-100">
-                        {proc.fastingHours ? `${proc.fastingHours}h Fasting` : 'Fasting Required'}
+                {/* Procedure Title with 3D Thumbnail */}
+                <div className="flex items-start gap-3">
+                  <TestThumbnail testId={proc.id} category={proc.category} className="w-14 h-14 shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-base font-bold text-slate-900 group-hover:text-[#0066B2] transition-colors font-display leading-tight">
+                      {proc.name}
+                    </h3>
+                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                      <span className="text-[10px] font-semibold text-[#0066B2] bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
+                        {proc.sampleType}
                       </span>
-                    )}
+                      {proc.fastingRequired && (
+                        <span className="text-[10px] font-semibold text-[#D32F2F] bg-red-50 px-2 py-0.5 rounded border border-red-100">
+                          {proc.fastingHours ? `${proc.fastingHours}h Fasting` : 'Fasting Required'}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
@@ -142,10 +146,10 @@ export const SpecialProceduresSection: React.FC<SpecialProceduresSectionProps> =
 
             <div className="pt-4 mt-3 border-t border-slate-800">
               <a
-                href="tel:+919617659936"
+                href="tel:+919977833679"
                 className="w-full py-2 px-3 bg-[#E86A17] hover:bg-[#d45e12] text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1.5 block text-center"
               >
-                <span>Call 24x7 Helpline: 096176 59936</span>
+                <span>Call 24x7 Helpline: 99778 33679 / 80853 67924</span>
               </a>
             </div>
           </div>

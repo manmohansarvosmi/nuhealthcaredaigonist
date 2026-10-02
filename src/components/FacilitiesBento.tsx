@@ -1,5 +1,8 @@
 import React from 'react';
 import { ShieldCheck, Cpu, ArrowUpRight, Zap, Thermometer, UserCheck } from 'lucide-react';
+import heroLabImg from '../assets/images/hero_diagnostic_lab_1790917833738.jpg';
+import pathologyLabImg from '../assets/images/pathology_automation_lab_1790917863037.jpg';
+import homeCollectionImg from '../assets/images/home_sample_collection_1790917877576.jpg';
 
 interface FacilitiesBentoProps {
   onOpenHomeBooking: () => void;
@@ -61,7 +64,7 @@ export const FacilitiesBento: React.FC<FacilitiesBentoProps> = ({
 
             <div className="relative aspect-[21/9] sm:aspect-[16/7] w-full overflow-hidden bg-slate-950">
               <img
-                src="/src/assets/images/hero_diagnostic_lab_1790917833738.jpg"
+                src={heroLabImg}
                 alt="Digital X-Ray and Diagnostics at Nu Health Care Diagnostic"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
@@ -94,7 +97,7 @@ export const FacilitiesBento: React.FC<FacilitiesBentoProps> = ({
 
             <div className="relative aspect-[16/8] w-full overflow-hidden bg-slate-950 mt-auto">
               <img
-                src="/src/assets/images/pathology_automation_lab_1790917863037.jpg"
+                src={pathologyLabImg}
                 alt="Automated pathology analyzers at Nu Health Care Diagnostic"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
@@ -135,14 +138,14 @@ export const FacilitiesBento: React.FC<FacilitiesBentoProps> = ({
 
             <div className="relative aspect-[16/7] w-full overflow-hidden bg-slate-950 mt-auto">
               <img
-                src="/src/assets/images/home_sample_collection_1790917877576.jpg"
+                src={homeCollectionImg}
                 alt="Nu Health Care certified home sample collection specialist"
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
               <div className="absolute bottom-2.5 left-4 text-[11px] text-white">
-                Available 06:30 AM to 07:00 PM Across Dabra
+                Available 08:30 AM to 09:00 PM Across Dabra & Karera
               </div>
             </div>
           </div>

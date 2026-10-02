@@ -40,18 +40,24 @@ export const Header: React.FC<HeaderProps> = ({
               Home & Hospital Sample Collection Available
             </span>
           </div>
-          <div className="flex items-center gap-3 text-[11px] font-mono">
-            <a 
-              href="tel:+919617659936" 
-              className="flex items-center gap-1 text-white hover:text-[#F37920] transition-colors"
-            >
-              <Phone className="w-3 h-3 text-[#D32F2F]" />
-              <span className="font-semibold">24x7: 096176 59936</span>
-            </a>
-            <span className="hidden sm:inline text-slate-600">|</span>
-            <div className="hidden sm:flex items-center gap-1 text-slate-300">
-              <Clock className="w-3 h-3 text-[#F37920]" />
-              <span>Reports in 4-6 Hrs</span>
+          <div className="flex items-center gap-2.5 text-[11px] font-mono flex-wrap">
+            {/* Highlighted Timing Badge */}
+            <div className="hidden sm:inline-flex items-center gap-1.5 bg-sky-950/80 border border-sky-400/40 text-sky-200 px-2.5 py-0.5 rounded-full font-semibold">
+              <Clock className="w-3 h-3 text-sky-400" />
+              <span>Timing: <strong className="text-white">08:30 AM – 09:00 PM</strong></span>
+            </div>
+
+            {/* Highlighted Phone Numbers Badge */}
+            <div className="inline-flex items-center gap-1.5 bg-orange-500/20 border border-orange-400/50 text-orange-200 px-3 py-0.5 rounded-full font-bold shadow-xs">
+              <Phone className="w-3 h-3 text-[#F37920] animate-pulse" />
+              <span className="text-orange-300">Call:</span>
+              <a href="tel:+919977833679" className="text-white hover:text-[#F37920] transition-colors underline decoration-orange-400 underline-offset-2">
+                99778 33679
+              </a>
+              <span className="text-orange-400/80">/</span>
+              <a href="tel:+918085367924" className="text-white hover:text-[#F37920] transition-colors underline decoration-orange-400 underline-offset-2">
+                80853 67924
+              </a>
             </div>
           </div>
         </div>

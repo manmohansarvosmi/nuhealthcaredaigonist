@@ -47,22 +47,41 @@ export const BranchesSection: React.FC = () => {
                   )}
                 </div>
 
-                <div className="space-y-1.5 text-xs text-slate-600">
-                  <div className="flex items-start gap-1.5">
+                <div className="space-y-2 text-xs text-slate-600">
+                  <div className="flex items-start gap-1.5 text-slate-700">
                     <MapPin className="w-3.5 h-3.5 text-[#F37920] mt-0.5 shrink-0" />
-                    <span className="text-[11px]">{center.address}, {center.city}</span>
+                    <span className="text-[11px] font-medium">{center.address}, {center.city}</span>
                   </div>
 
-                  <div className="flex items-center gap-1.5 font-mono">
-                    <Phone className="w-3.5 h-3.5 text-[#0066B2] shrink-0" />
-                    <a href={`tel:${center.phone}`} className="hover:text-[#F37920] transition-colors font-medium text-[11px]">
-                      {center.phone}
-                    </a>
+                  {/* Highlighted Phone Numbers Pill Box */}
+                  <div className="bg-orange-50 border border-orange-200/90 rounded-lg px-2.5 py-1.5 flex items-center gap-2 font-mono">
+                    <Phone className="w-3.5 h-3.5 text-[#F37920] shrink-0 animate-pulse" />
+                    <div className="flex items-center gap-1.5 flex-wrap text-xs font-bold text-orange-900">
+                      <span className="text-orange-700 text-[10px] uppercase font-sans">Helpline:</span>
+                      {center.phone.split(',').map((ph, pIdx) => {
+                        const cleanPh = ph.trim().replace(/\s+/g, '');
+                        return (
+                          <React.Fragment key={pIdx}>
+                            <a
+                              href={`tel:+91${cleanPh}`}
+                              className="text-[#0b1e33] hover:text-[#F37920] transition-colors underline decoration-orange-300 underline-offset-2"
+                            >
+                              {ph.trim()}
+                            </a>
+                            {pIdx < center.phone.split(',').length - 1 && <span className="text-orange-300">/</span>}
+                          </React.Fragment>
+                        );
+                      })}
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-1.5 font-mono">
-                    <Clock className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                    <span className="text-[11px]">{center.hours}</span>
+                  {/* Highlighted Timing Pill Box */}
+                  <div className="bg-blue-50 border border-blue-200/90 rounded-lg px-2.5 py-1.5 flex items-center gap-2 font-mono">
+                    <Clock className="w-3.5 h-3.5 text-[#0066B2] shrink-0" />
+                    <div className="text-xs font-bold text-blue-950">
+                      <span className="text-blue-700 text-[10px] uppercase font-sans mr-1.5">Hours:</span>
+                      <span>{center.hours}</span>
+                    </div>
                   </div>
                 </div>
 

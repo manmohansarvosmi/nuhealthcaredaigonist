@@ -47,13 +47,12 @@ export const HomeCollectionModal: React.FC<HomeCollectionModalProps> = ({
   ];
 
   const timeSlots = [
-    '06:30 AM - 07:30 AM (Early Fasting)',
-    '07:30 AM - 08:30 AM (Peak Morning)',
-    '08:30 AM - 09:30 AM',
-    '09:30 AM - 10:30 AM',
-    '11:00 AM - 12:00 PM (Non-fasting)',
-    '04:00 PM - 05:00 PM (Evening)',
-    '06:00 PM - 07:00 PM (Evening)'
+    '08:30 AM - 09:30 AM (Morning Fasting)',
+    '09:30 AM - 10:30 AM (Morning)',
+    '11:00 AM - 12:30 PM (Mid-Day)',
+    '02:00 PM - 04:00 PM (Afternoon)',
+    '05:00 PM - 07:00 PM (Evening)',
+    '07:30 PM - 09:00 PM (Late Evening)'
   ];
 
   const handleSubmit = (e: React.FormEvent) => {

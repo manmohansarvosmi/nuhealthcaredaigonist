@@ -153,12 +153,12 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
                 <div className="pt-3 mt-3 border-t border-slate-200/70">
                   {item.isCall ? (
                     <a
-                      href="tel:+919617659936"
+                      href="tel:+919977833679"
                       className="w-full inline-flex items-center justify-between text-[11px] font-bold text-[#D32F2F] hover:text-[#b71c1c] transition-colors"
                     >
                       <span className="flex items-center gap-1">
                         <PhoneCall className="w-3 h-3" />
-                        096176 59936
+                        99778 33679 / 80853 67924
                       </span>
                       <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                     </a>
@@ -197,11 +197,11 @@ export const HowItWorks: React.FC<HowItWorksProps> = ({
                 <span>Book Home Collection</span>
               </button>
               <a
-                href="tel:+919617659936"
+                href="tel:+919977833679"
                 className="px-3 py-1.5 bg-slate-800/90 hover:bg-slate-700 text-slate-200 hover:text-white font-semibold text-xs rounded-lg border border-slate-700 transition-all flex items-center gap-1.5 font-mono"
               >
                 <PhoneCall className="w-3 h-3 text-[#F37920]" />
-                <span>096176 59936</span>
+                <span>99778 33679 / 80853 67924</span>
               </a>
             </div>
           </div>
