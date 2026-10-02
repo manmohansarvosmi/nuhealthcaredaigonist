@@ -1,573 +1,821 @@
-import { DiagnosticTest, HealthPackage, DiagnosticReport, DoctorProfile, DiagnosticCenter } from '../types';
+import { DiagnosticTest, HealthPackage, DiagnosticCenter } from '../types';
 
 export const DIAGNOSTIC_TESTS: DiagnosticTest[] = [
+  // ===================== PATHOLOGY & BLOOD TESTS =====================
   {
-    id: 'cbc-complete-blood-count',
-    name: 'Complete Blood Count (CBC) with ESR',
+    id: 'hb-esr',
+    name: 'HB, ESR (Hemoglobin & Erythrocyte Sedimentation Rate)',
     category: 'pathology',
     sampleType: 'Blood',
-    turnaroundTime: '4 - 6 Hours',
+    turnaroundTime: '2 - 4 Hours',
+    fastingRequired: false,
+    preparationNote: 'No fasting required. Free home/hospital sample collection available.',
+    parametersCount: 2,
+    parameters: ['Hemoglobin (Hb %)', 'ESR (Westergren Method)'],
+    description: 'Essential screening test to detect anemia, systemic infection, acute/chronic inflammation, and general wellness.',
+    isPopular: true
+  },
+  {
+    id: 'complete-haemogram-cbc',
+    name: 'Complete Haemogram (CBC)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 - 4 Hours',
     fastingRequired: false,
     preparationNote: 'No special fasting required. Stay normally hydrated.',
-    originalPrice: 450,
-    price: 299,
     parametersCount: 24,
     parameters: [
       'Hemoglobin (Hb)',
-      'Total Leukocyte Count (TLC)',
+      'Total Leukocyte Count (TLC / WBC)',
       'RBC Count',
       'Platelet Count',
-      'Hematocrit (PCV)',
+      'PCV / Hematocrit',
       'MCV, MCH, MCHC',
       'Neutrophils, Lymphocytes, Monocytes, Eosinophils, Basophils',
-      'ESR (Westergren Method)',
-      'RDW-CV & RDW-SD'
+      'RDW-CV & RDW-SD',
+      'Peripheral Blood Smear Examination'
     ],
-    description: 'Gold-standard blood screening to detect anemia, systemic infection, clotting disorders, and hematologic health.',
+    description: 'Comprehensive 5-part differential blood evaluation for anemia, viral/bacterial infections, platelet counts, and allergies.',
     isPopular: true
   },
   {
-    id: 'lipid-profile-advanced',
-    name: 'Lipid Profile - Comprehensive Cardiac Risk',
-    category: 'cardiology',
+    id: 'malaria-parasite-mp-fm',
+    name: 'Malaria Parasite (MP / FM)',
+    category: 'pathology',
     sampleType: 'Blood',
-    turnaroundTime: '6 Hours',
-    fastingRequired: true,
-    fastingHours: 12,
-    preparationNote: '10 to 12 hours of overnight fasting is mandatory. Plain water is permitted.',
-    originalPrice: 900,
-    price: 550,
-    parametersCount: 8,
-    parameters: [
-      'Total Cholesterol',
-      'HDL Cholesterol (Good Cholesterol)',
-      'LDL Cholesterol (Bad Cholesterol)',
-      'VLDL Cholesterol',
-      'Triglycerides',
-      'Total / HDL Cholesterol Ratio',
-      'LDL / HDL Ratio',
-      'Non-HDL Cholesterol'
-    ],
-    description: 'Evaluates hyperlipidemia, atherosclerosis risk, and vascular cardiovascular indicators.',
-    isPopular: true
-  },
-  {
-    id: 'mri-brain-3t',
-    name: 'MRI Brain (3.0 Tesla High-Resolution)',
-    category: 'radiology',
-    sampleType: 'Imaging Scan',
-    turnaroundTime: 'Same Day (Within 8 Hours)',
+    turnaroundTime: '2 Hours',
     fastingRequired: false,
-    preparationNote: 'Remove all metallic jewellery, watches, hearing aids, and dental plates before entering the magnet room.',
-    originalPrice: 7500,
-    price: 5499,
-    parametersCount: 1,
-    parameters: ['T1, T2, FLAIR, DWI, SWI & 3D TOF Angiography Brain Sequences'],
-    description: 'Advanced 3-Tesla silent neuro-imaging with sub-millimeter slice precision for cerebrovascular, neurological, and structural diagnosis.',
+    preparationNote: 'Ideal during fever spike. Rapid card and thick/thin smear examination.',
+    parametersCount: 2,
+    parameters: ['Plasmodium vivax (Pv)', 'Plasmodium falciparum (Pf) Antigen & Smear'],
+    description: 'Rapid card antigen and microscopic smear test for early diagnosis of malaria parasites.',
     isPopular: true
   },
   {
-    id: 'ct-scan-chest-hrct',
-    name: 'HRCT Chest (128-Slice Low-Dose CT)',
-    category: 'radiology',
-    sampleType: 'Imaging Scan',
-    turnaroundTime: '6 Hours',
-    fastingRequired: true,
-    fastingHours: 4,
-    preparationNote: '4 hours fasting recommended if IV contrast is advised. Bring previous chest X-rays.',
-    originalPrice: 5000,
-    price: 3600,
-    parametersCount: 1,
-    parameters: ['High-Resolution Pulmonary Parenchymal & Mediastinal Windows'],
-    description: 'Ultra-thin volumetric lung scanning to detect interstitial lung disease, pneumonia, bronchiolitis, and nodules.',
+    id: 'widal-test',
+    name: 'Widal Test (Typhoid Serology)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 - 4 Hours',
+    fastingRequired: false,
+    preparationNote: 'Rapid slide and quantitative tube agglutination test.',
+    parametersCount: 4,
+    parameters: ['S. typhi O Antigen', 'S. typhi H Antigen', 'S. paratyphi AH', 'S. paratyphi BH'],
+    description: 'Diagnostic serological test for enteric/typhoid fever detection and antibody titer evaluation.',
     isPopular: true
   },
   {
-    id: 'ultrasound-whole-abdomen',
-    name: 'Ultrasound Whole Abdomen & Pelvis (4D Color Doppler)',
-    category: 'radiology',
-    sampleType: 'Imaging Scan',
-    turnaroundTime: 'Instant Report (30 Mins)',
-    fastingRequired: true,
-    fastingHours: 6,
-    preparationNote: '6 hours fasting required. Drink 4-5 glasses of water 1 hour prior to maintain full urinary bladder.',
-    originalPrice: 1800,
-    price: 1250,
-    parametersCount: 1,
-    parameters: ['Liver, Gallbladder, Pancreas, Spleen, Kidneys, Urinary Bladder, Prostate/Uterus & Ovaries'],
-    description: 'Real-time color Doppler sonography evaluating abdominal organs, stones, fatty liver, cysts, and pelvic anatomy.',
+    id: 'bt-ct-clotting-time',
+    name: 'BT / CT (Bleeding Time & Clotting Time)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '1 - 2 Hours',
+    fastingRequired: false,
+    preparationNote: 'Standard pre-operative screening test for coagulation.',
+    parametersCount: 2,
+    parameters: ['Bleeding Time (Duke Method)', 'Clotting Time (Capillary Tube Method)'],
+    description: 'Assesses primary platelet function and intrinsic blood clotting time before surgeries or dental procedures.'
+  },
+  {
+    id: 'blood-group-rh-typing',
+    name: 'Blood Group & Rh Typing',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '1 Hour',
+    fastingRequired: false,
+    preparationNote: 'No preparation needed. Instant verification card provided.',
+    parametersCount: 2,
+    parameters: ['ABO Blood Group', 'Rh Factor (Positive / Negative)'],
+    description: 'Determines ABO blood group and Rhesus (Rh) antigen status for transfusions, pregnancy, and emergency donor identification.',
     isPopular: true
+  },
+  {
+    id: 'blood-sugar-fasting-pp-random',
+    name: 'Blood Sugar (Fasting / PP / Random)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '2 - 3 Hours',
+    fastingRequired: true,
+    fastingHours: 8,
+    preparationNote: 'For Fasting: 8-10 hours overnight fast. For PP: Exactly 2 hours after breakfast.',
+    parametersCount: 1,
+    parameters: ['Plasma Glucose (GOD-POD Method)'],
+    description: 'Primary test for diabetes detection, hypoglycemia, and glycemic monitoring.',
+    isPopular: true
+  },
+  {
+    id: 'hbsag-australia-antigen',
+    name: 'HBSAG (Australia Antigen - Hepatitis B)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 - 4 Hours',
+    fastingRequired: false,
+    preparationNote: 'High-sensitivity immunochromatographic / CLIA screening.',
+    parametersCount: 1,
+    parameters: ['Hepatitis B Surface Antigen (HBsAg)'],
+    description: 'Detects Hepatitis B virus infection in liver disorders, pregnancy, blood transfusion, and pre-surgery screening.'
+  },
+  {
+    id: 'hiv-screening-test',
+    name: 'HIV I & II Antibody Test',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 - 4 Hours',
+    fastingRequired: false,
+    preparationNote: '100% confidential testing following standard certified protocols.',
+    parametersCount: 2,
+    parameters: ['HIV-1 Antibodies', 'HIV-2 Antibodies'],
+    description: 'Confidential rapid and ELISA screening for Human Immunodeficiency Virus types 1 & 2.'
   },
   {
     id: 'hba1c-glycated-hemoglobin',
-    name: 'HbA1c (Glycated Hemoglobin) - HPLC Method',
-    category: 'diabetes',
+    name: 'HBA1C (Glycated Hemoglobin - 3 Month Average)',
+    category: 'pathology',
     sampleType: 'Blood',
     turnaroundTime: '4 Hours',
     fastingRequired: false,
-    preparationNote: 'Fasting is not required. Reflects average blood sugar control over the past 90 days.',
-    originalPrice: 650,
-    price: 399,
+    preparationNote: 'No fasting required. Reflects 90-day average glucose control.',
     parametersCount: 2,
     parameters: ['HbA1c %', 'Estimated Average Glucose (eAG mg/dL)'],
-    description: 'NGSP and IFCC certified high-performance liquid chromatography assay for diabetes monitoring.',
+    description: 'HPLC-certified gold standard test for long-term diabetes monitoring and pre-diabetes detection.',
     isPopular: true
   },
   {
-    id: 'vitamin-d-and-b12-combo',
-    name: 'Vitamin D (25-OH) & Vitamin B12 Duo',
-    category: 'vitamins',
+    id: 'vdrl-syphilis-serology',
+    name: 'VDRL (Syphilis Serology Screening)',
+    category: 'pathology',
     sampleType: 'Blood',
-    turnaroundTime: '6 Hours',
-    fastingRequired: true,
-    fastingHours: 8,
-    preparationNote: 'Overnight fasting is recommended. Avoid multivitamin supplements for 24 hours prior.',
-    originalPrice: 2200,
-    price: 1199,
-    parametersCount: 2,
-    parameters: ['25-Hydroxy Vitamin D Total', 'Cyanocobalamin (Vitamin B12)'],
-    description: 'Essential nutritional markers for bone density, nerve regeneration, immunity, and fatigue evaluation.',
+    turnaroundTime: '3 Hours',
+    fastingRequired: false,
+    preparationNote: 'Routine antenatal and pre-marital serological screen.',
+    parametersCount: 1,
+    parameters: ['VDRL / RPR Flocculation Titer'],
+    description: 'Screening test for Treponema pallidum (Syphilis) infection in routine health and pregnancy checkups.'
+  },
+  {
+    id: 'bilirubin-total-direct-indirect',
+    name: 'Bilirubin (Total, Direct & Indirect)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '2 - 3 Hours',
+    fastingRequired: false,
+    preparationNote: 'Important in jaundice, liver distress, and general screening.',
+    parametersCount: 3,
+    parameters: ['Total Bilirubin', 'Direct (Conjugated) Bilirubin', 'Indirect (Unconjugated) Bilirubin'],
+    description: 'Evaluates jaundice, biliary obstruction, liver inflammation, and red blood cell breakdown.',
     isPopular: true
   },
   {
-    id: 'thyroid-profile-total',
-    name: 'Thyroid Function Test (T3, T4, TSH Ultra-sensitive)',
+    id: 'uric-acid-serum',
+    name: 'Uric Acid (Serum)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 Hours',
+    fastingRequired: true,
+    fastingHours: 6,
+    preparationNote: 'Overnight fasting is helpful. Avoid alcohol & high purine foods prior.',
+    parametersCount: 1,
+    parameters: ['Serum Uric Acid'],
+    description: 'Assesses hyperuricemia, gouty arthritis joint pain, and kidney filtration efficiency.',
+    isPopular: true
+  },
+  {
+    id: 'crp-c-reactive-protein',
+    name: 'CRP (C-Reactive Protein - Quantitative)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 - 4 Hours',
+    fastingRequired: false,
+    preparationNote: 'Turbidimetric quantitative assay.',
+    parametersCount: 1,
+    parameters: ['Serum C-Reactive Protein (CRP mg/L)'],
+    description: 'High-sensitivity marker for acute bacterial infection, deep tissue inflammation, and cardiovascular strain.',
+    isPopular: true
+  },
+  {
+    id: 'ra-factor-rheumatoid-factor',
+    name: 'RA Factor (Rheumatoid Arthritis Factor)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 - 4 Hours',
+    fastingRequired: false,
+    preparationNote: 'Quantitative latex turbidimetry for arthritis assessment.',
+    parametersCount: 1,
+    parameters: ['Rheumatoid Factor (IU/mL)'],
+    description: 'Diagnostic autoimmune marker for Rheumatoid Arthritis and chronic joint stiffness evaluation.',
+    isPopular: true
+  },
+  {
+    id: 'calcium-serum',
+    name: 'Calcium (Serum Total)',
+    category: 'pathology',
+    sampleType: 'Blood',
+    turnaroundTime: '3 Hours',
+    fastingRequired: false,
+    preparationNote: 'Early morning sample preferred. Stay normally hydrated.',
+    parametersCount: 1,
+    parameters: ['Total Serum Calcium (mg/dL)'],
+    description: 'Evaluates bone mineral density, neuromuscular twitching, parathyroid health, and osteoporosis risk.',
+    isPopular: true
+  },
+  {
+    id: 'lipid-profile-complete',
+    name: 'Lipid Profile (Complete Heart & Cholesterol Panel)',
+    category: 'cardiology',
+    sampleType: 'Blood',
+    turnaroundTime: '4 - 6 Hours',
+    fastingRequired: true,
+    fastingHours: 12,
+    preparationNote: '10 to 12 hours overnight fast mandatory. Plain water allowed.',
+    parametersCount: 8,
+    parameters: [
+      'Total Cholesterol',
+      'HDL Cholesterol (Good)',
+      'LDL Cholesterol (Bad)',
+      'VLDL Cholesterol',
+      'Triglycerides',
+      'Total / HDL Ratio',
+      'LDL / HDL Ratio',
+      'Non-HDL Cholesterol'
+    ],
+    description: 'Comprehensive cardiac risk evaluation measuring good & bad cholesterol, triglycerides, and arterial health.',
+    isPopular: true
+  },
+  {
+    id: 'liver-function-test-lft',
+    name: 'Liver Function Test (LFT Complete)',
     category: 'pathology',
     sampleType: 'Blood',
     turnaroundTime: '4 - 6 Hours',
     fastingRequired: true,
     fastingHours: 8,
-    preparationNote: 'Early morning sample before taking thyroid medication is advised.',
-    originalPrice: 600,
-    price: 399,
-    parametersCount: 3,
-    parameters: ['Total Triiodothyronine (T3)', 'Total Thyroxine (T4)', 'Thyroid Stimulating Hormone (TSH)'],
-    description: 'Chemiluminescence immunoassay (CLIA) measuring hyperthyroidism and hypothyroidism hormone levels.',
+    preparationNote: 'Overnight fasting recommended for optimal hepatic enzyme baseline.',
+    parametersCount: 11,
+    parameters: [
+      'Bilirubin Total',
+      'Bilirubin Direct & Indirect',
+      'SGOT / AST',
+      'SGPT / ALT',
+      'Alkaline Phosphatase (ALP)',
+      'Total Protein',
+      'Albumin',
+      'Globulin',
+      'A/G Ratio',
+      'Gamma GT (GGT)'
+    ],
+    description: 'Detailed analysis of liver enzymes, protein synthesis, jaundice, fatty liver, and metabolic health.',
     isPopular: true
   },
   {
-    id: 'liver-function-test',
-    name: 'Liver Function Test (LFT) with Enzymes',
+    id: 'thyroid-function-tsh-t3-t4',
+    name: 'Thyroid Function (TSH, T3, T4)',
     category: 'pathology',
     sampleType: 'Blood',
-    turnaroundTime: '6 Hours',
+    turnaroundTime: '4 - 6 Hours',
     fastingRequired: true,
-    fastingHours: 10,
-    preparationNote: '10 hours overnight fasting. Avoid alcohol for 48 hours prior to test.',
-    originalPrice: 850,
-    price: 599,
-    parametersCount: 11,
-    parameters: [
-      'Bilirubin Total, Direct & Indirect',
-      'SGOT (AST)',
-      'SGPT (ALT)',
-      'Alkaline Phosphatase (ALP)',
-      'Gamma GT (GGT)',
-      'Total Protein & Albumin',
-      'Globulin & A/G Ratio'
-    ],
-    description: 'Comprehensive screening for hepatotoxicity, jaundice, fatty liver, and metabolic synthesis integrity.',
-    isPopular: false
+    fastingHours: 8,
+    preparationNote: 'Morning fasting sample prior to taking daily thyroid medication is recommended.',
+    parametersCount: 3,
+    parameters: ['Total T3 (Triiodothyronine)', 'Total T4 (Thyroxine)', 'TSH (Thyroid Stimulating Hormone Ultra-sensitive)'],
+    description: 'Advanced immunoassay measuring thyroid gland activity to detect hypothyroidism, hyperthyroidism, and metabolism changes.',
+    isPopular: true
   },
   {
-    id: 'kidney-function-test',
-    name: 'Kidney Function Test (KFT / RFT) with Electrolytes',
+    id: 'kidney-function-test-kft',
+    name: 'Kidney Function Test (KFT / RFT)',
     category: 'pathology',
     sampleType: 'Blood',
-    turnaroundTime: '6 Hours',
-    fastingRequired: false,
-    preparationNote: 'Fasting not strictly required; drink adequate water.',
-    originalPrice: 900,
-    price: 649,
+    turnaroundTime: '4 - 6 Hours',
+    fastingRequired: true,
+    fastingHours: 8,
+    preparationNote: 'Overnight fasting recommended. Drink adequate water.',
     parametersCount: 8,
     parameters: [
+      'Blood Urea',
       'Serum Creatinine',
-      'Blood Urea Nitrogen (BUN)',
       'Uric Acid',
-      'Serum Sodium (Na+)',
-      'Serum Potassium (K+)',
-      'Serum Chloride (Cl-)',
-      'eGFR (Estimated Glomerular Filtration Rate)',
-      'BUN / Creatinine Ratio'
+      'Blood Urea Nitrogen (BUN)',
+      'Sodium (Na+)',
+      'Potassium (K+)',
+      'Chloride (Cl-)',
+      'eGFR (Estimated Glomerular Filtration)'
     ],
-    description: 'Precision biochemical markers assessing renal clearance, glomerular filtration, and electrolyte balance.'
+    description: 'Measures renal filtration, creatinine clearance, nitrogenous wastes, and vital electrolyte balance.',
+    isPopular: true
   },
   {
-    id: 'digital-x-ray-chest-pa',
-    name: 'Digital X-Ray Chest (PA View) - DR System',
-    category: 'radiology',
-    sampleType: 'Imaging Scan',
-    turnaroundTime: 'Instant (15 Mins)',
+    id: 'mantoux-test',
+    name: 'Mantoux Test (Tuberculin Skin Test)',
+    category: 'pathology',
+    sampleType: 'Swab',
+    turnaroundTime: '48 - 72 Hours',
     fastingRequired: false,
-    preparationNote: 'No fasting needed. Change into clinic gown for scanning.',
-    originalPrice: 600,
-    price: 350,
+    preparationNote: 'Intradermal injection given at center; reading evaluated after 48-72 hours.',
     parametersCount: 1,
-    parameters: ['High-Frequency Direct Radiography Chest PA View'],
-    description: 'High-frequency digital radiography for pneumonia, cardiomegaly, pleural effusion, and ribs examination.'
+    parameters: ['Induration Diameter in mm (PPD 5 TU)'],
+    description: 'Standard diagnostic test to assess exposure to Mycobacterium tuberculosis infection.'
+  },
+
+  // ===================== URINE, SEMEN & CULTURES =====================
+  {
+    id: 'semen-analysis',
+    name: 'Semen Analysis (Complete Fertility & Motility)',
+    category: 'culture',
+    sampleType: 'Semen',
+    turnaroundTime: '4 - 6 Hours',
+    fastingRequired: false,
+    preparationNote: 'Mandatory 3 to 5 days of sexual abstinence before sample collection. Sterile container provided.',
+    parametersCount: 8,
+    parameters: [
+      'Sperm Count / Concentration',
+      'Total & Progressive Motility %',
+      'Sperm Morphology (Normal / Abnormal %)',
+      'Volume & Liquefaction Time',
+      'pH & Viscosity',
+      'Pus Cells & Epithelial Cells',
+      'Viability %'
+    ],
+    description: 'Comprehensive microscopic examination for fertility, sperm count, active motility, and structural morphology.'
   },
   {
-    id: 'echocardiography-color-doppler',
-    name: '2D Echocardiography with Color Doppler',
+    id: 'urine-rm-culture',
+    name: 'Urine R/M/Culture (Routine, Microscopic & Culture)',
+    category: 'culture',
+    sampleType: 'Urine',
+    turnaroundTime: 'Same Day for R/M; 48 Hrs for Culture',
+    fastingRequired: false,
+    preparationNote: 'Clean-catch midstream morning urine in sterile vacuum container.',
+    parametersCount: 16,
+    parameters: [
+      'Color, Appearance & Specific Gravity',
+      'pH & Reaction',
+      'Protein / Albumin',
+      'Sugar / Glucose',
+      'Ketone Bodies & Bile Salts',
+      'Pus Cells (Leukocytes)',
+      'RBCs & Casts',
+      'Epithelial Cells & Crystals',
+      'Bacterial Growth & Antibiotic Sensitivity (Culture)'
+    ],
+    description: 'Screens for urinary tract infections (UTI), kidney stones, proteinuria, and specific antibiotic sensitivity.'
+  },
+  {
+    id: 'sputum-afb',
+    name: 'Sputum (AFB - Acid Fast Bacilli)',
+    category: 'culture',
+    sampleType: 'Sputum',
+    turnaroundTime: 'Same Day',
+    fastingRequired: false,
+    preparationNote: 'Early morning deep-cough sputum before brushing or eating.',
+    parametersCount: 2,
+    parameters: ['Ziehl-Neelsen (ZN) Smear Examination for AFB', 'Grading of Bacilli'],
+    description: 'Direct microscopic smear examination for pulmonary tuberculosis and respiratory infections.'
+  },
+  {
+    id: 'pus-throat-swab-culture',
+    name: 'Pus / Throat Swab (Culture & Sensitivity)',
+    category: 'culture',
+    sampleType: 'Swab',
+    turnaroundTime: '48 Hours',
+    fastingRequired: false,
+    preparationNote: 'Sterile swab collection from affected site prior to starting antibiotic course.',
+    parametersCount: 4,
+    parameters: ['Gram Stain Examination', 'Organism Identification', 'Colony Count', 'Antibiotic Sensitivity Profile'],
+    description: 'Isolates pathogenic bacteria and determines the most effective antibiotic drugs for targeted treatment.'
+  },
+  {
+    id: 'upt-urine-pregnancy',
+    name: 'UPT (Urine Pregnancy Test)',
+    category: 'gynae',
+    sampleType: 'Urine',
+    turnaroundTime: '1 Hour',
+    fastingRequired: false,
+    preparationNote: 'Early morning first urine sample provides highest hCG concentration.',
+    parametersCount: 1,
+    parameters: ['Human Chorionic Gonadotropin (hCG) Detection'],
+    description: 'High-sensitivity immunochromatographic assay for early pregnancy confirmation.',
+    isPopular: true
+  },
+
+  // ===================== VITAMINS & GYNAE SPECIAL =====================
+  {
+    id: 'vitamin-d-total',
+    name: 'Vitamin D (25-Hydroxy Vitamin D Total)',
+    category: 'vitamins',
+    sampleType: 'Blood',
+    turnaroundTime: '4 - 6 Hours',
+    fastingRequired: false,
+    preparationNote: 'Overnight fasting preferred. Avoid vitamin D supplements 24 hours prior.',
+    parametersCount: 1,
+    parameters: ['25-OH Vitamin D Total (ng/mL)'],
+    description: 'Crucial for calcium absorption, bone strength, joint mobility, and immune defense.',
+    isPopular: true
+  },
+  {
+    id: 'vitamin-b12-cyanocobalamin',
+    name: 'Vitamin B12 (Cyanocobalamin)',
+    category: 'vitamins',
+    sampleType: 'Blood',
+    turnaroundTime: '4 - 6 Hours',
+    fastingRequired: true,
+    fastingHours: 8,
+    preparationNote: 'Overnight fasting recommended. Evaluates nerve tingling, fatigue, and red blood cell health.',
+    parametersCount: 1,
+    parameters: ['Vitamin B12 (pg/mL)'],
+    description: 'Essential vitamin for neurological nerve function, red blood cell synthesis, and energy levels.',
+    isPopular: true
+  },
+  {
+    id: 'gynae-lh-fsh-prolactin-torch',
+    name: 'Gynae Special: (LH, FSH, Prolactin, Torch Profile)',
+    category: 'gynae',
+    sampleType: 'Blood',
+    turnaroundTime: 'Same Day to 24 Hours',
+    fastingRequired: true,
+    fastingHours: 8,
+    preparationNote: 'For reproductive hormones: sample usually collected on Day 2-3 of menstrual cycle or as advised.',
+    parametersCount: 8,
+    parameters: [
+      'Luteinizing Hormone (LH)',
+      'Follicle Stimulating Hormone (FSH)',
+      'Serum Prolactin',
+      'Toxoplasma IgG & IgM',
+      'Rubella IgG & IgM',
+      'Cytomegalovirus (CMV) IgG & IgM',
+      'Herpes Simplex Virus (HSV 1 & 2) IgG & IgM'
+    ],
+    description: 'Comprehensive hormonal and TORCH panel for irregular menstrual cycles, fertility assessment, and antenatal care.',
+    isPopular: true
+  },
+  {
+    id: 'gynae-double-marker-amh-hcv',
+    name: 'Gynae Special: Double Marker, AMH, HCV',
+    category: 'gynae',
+    sampleType: 'Blood',
+    turnaroundTime: '24 - 48 Hours',
+    fastingRequired: false,
+    preparationNote: 'Double Marker is performed during 11-13 weeks of pregnancy with ultrasound correlation.',
+    parametersCount: 4,
+    parameters: [
+      'Anti-Mullerian Hormone (AMH - Ovarian Reserve)',
+      'Free Beta hCG',
+      'PAPP-A (Pregnancy Associated Plasma Protein-A)',
+      'Hepatitis C Virus (HCV Antibody)'
+    ],
+    description: 'Advanced maternal screening for chromosomal risk, ovarian egg reserve (AMH), and Hepatitis C screening.'
+  },
+  {
+    id: 'pap-smear-lbc',
+    name: 'Pap Smear / LBC (Liquid Based Cytology)',
+    category: 'gynae',
+    sampleType: 'Swab',
+    turnaroundTime: '24 - 48 Hours',
+    fastingRequired: false,
+    preparationNote: 'Avoid douching or creams 48 hours prior to test. Do not schedule during active menses.',
+    parametersCount: 3,
+    parameters: ['Cervical Epithelial Cell Cytology', 'Infection / Inflammation Screening', 'Bethesda System Classification'],
+    description: 'Vital preventive cancer screening test for women to detect pre-cancerous and abnormal cervical changes early.'
+  },
+
+  // ===================== X-RAY STUDY =====================
+  {
+    id: 'xray-chest-ap-pa-view',
+    name: 'X-ray Chest AP / PA View',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '15 - 30 Mins',
+    fastingRequired: false,
+    preparationNote: 'Remove metallic necklaces or buttons. High-frequency digital imaging.',
+    parametersCount: 1,
+    parameters: ['Lungs, Cardiac Silhouette, Mediastinum, Ribs & Diaphragm Angles'],
+    description: 'High-clarity digital chest X-ray for pneumonia, bronchitis, cardiac silhouette, and rib fractures.',
+    isPopular: true
+  },
+  {
+    id: 'xray-abdomen-kub',
+    name: 'X-ray Abdomen / KUB (Kidney, Ureter, Bladder)',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '20 Mins',
+    fastingRequired: false,
+    preparationNote: 'Overnight bowel clearance helps enhance visualization of radio-opaque calculi.',
+    parametersCount: 1,
+    parameters: ['Kidneys, Ureters, Bladder & Intestinal Gas Patterns'],
+    description: 'Detects renal calculi (kidney stones), ureteric stones, bladder stones, and bowel obstruction.'
+  },
+  {
+    id: 'xray-lumbar-cervical-dorsal-spine',
+    name: 'X-ray Lumbar / Cervical / Dorsal Spine',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '20 Mins',
+    fastingRequired: false,
+    preparationNote: 'AP and Lateral views taken for precise spinal alignment and disc space evaluation.',
+    parametersCount: 2,
+    parameters: ['Vertebral Bodies, Intervertebral Disc Spaces, Spondylosis & Alignment'],
+    description: 'Evaluates cervical spondylosis, neck pain, lumbar disc space, and spinal curvature.'
+  },
+  {
+    id: 'xray-shoulder-elbow-wrist-joint',
+    name: 'X-ray Shoulder / Elbow / Wrist Joint',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '15 - 20 Mins',
+    fastingRequired: false,
+    preparationNote: 'Remove wristwatches, bangles, and rings prior to exposure.',
+    parametersCount: 2,
+    parameters: ['Articular Surfaces, Joint Space, Bone Cortex & Fracture Lines'],
+    description: 'Detects bone fractures, dislocations, joint arthritis, and structural strain.'
+  },
+  {
+    id: 'xray-knee-ankle-foot',
+    name: 'X-ray Knee / Ankle / Foot',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '15 - 20 Mins',
+    fastingRequired: false,
+    preparationNote: 'Standing weight-bearing views available for osteoarthritis knee joint evaluation.',
+    parametersCount: 2,
+    parameters: ['Medial & Lateral Joint Compartments, Patella, Osteophytes & Calcaneal Spur'],
+    description: 'Evaluates osteoarthritis joint space narrowing, ligament bone avulsions, and heel spurs.'
+  },
+  {
+    id: 'xray-pelvis-both-hip',
+    name: 'X-ray Pelvis Both Hip Joint',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '20 Mins',
+    fastingRequired: false,
+    preparationNote: 'AP view taken in supine position for femoral head and acetabulum symmetry.',
+    parametersCount: 1,
+    parameters: ['Femoral Heads, Acetabulum, Sacroiliac Joints & Pelvic Ring'],
+    description: 'Diagnoses hip joint arthritis, pelvic trauma, and femoral alignment.'
+  },
+  {
+    id: 'xray-skull',
+    name: 'X-ray Skull (AP & Lateral View)',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '20 Mins',
+    fastingRequired: false,
+    preparationNote: 'Remove hairpins, earrings, and metallic items.',
+    parametersCount: 2,
+    parameters: ['Cranial Vault, Sella Turcica, Facial Bones & Sutures'],
+    description: 'Investigates head trauma, skull fractures, sinus pathology, and cranial bone structure.'
+  },
+  {
+    id: 'xray-mastoid-mandible',
+    name: 'X-ray Mastoid / Mandible',
+    category: 'xray',
+    sampleType: 'Digital X-Ray',
+    turnaroundTime: '20 Mins',
+    fastingRequired: false,
+    preparationNote: 'Special oblique angles for mastoid air cells and temporomandibular (TM) joints.',
+    parametersCount: 2,
+    parameters: ['Mastoid Air Cells, Mandibular Ramus, Condyle & TM Joints'],
+    description: 'Evaluates chronic mastoiditis, ear infections, jaw pain, and mandible structure.'
+  },
+  // ===================== SPECIAL PROCEDURES (CONTRAST RADIOLOGY) =====================
+  {
+    id: 'ivp-intravenous-urography',
+    name: 'IVP (Intra Venous Urography)',
+    category: 'special',
+    sampleType: 'Contrast Study',
+    turnaroundTime: '1 - 2 Hours',
+    fastingRequired: true,
+    fastingHours: 6,
+    preparationNote: 'Overnight fasting and mild bowel clearance required. Recent serum creatinine report is required prior to contrast injection.',
+    parametersCount: 3,
+    parameters: ['Renal Parenchymal Excretion Time', 'Calyceal & Ureteric Anatomy / Stones', 'Bladder Filling & Emptying Function'],
+    description: 'Special radiological contrast study to evaluate kidney filtration, ureteric narrowing, hydronephrosis, stones, and bladder emptying.',
+    isPopular: true
+  },
+  {
+    id: 'barium-swallow',
+    name: 'Barium Swallow',
+    category: 'special',
+    sampleType: 'Contrast Study',
+    turnaroundTime: '45 - 60 Mins',
+    fastingRequired: true,
+    fastingHours: 8,
+    preparationNote: 'Overnight strict fasting (8 hours). Do not eat food or drink water in the morning prior to the investigation.',
+    parametersCount: 3,
+    parameters: ['Pharyngeal Phase & Swallowing Reflex', 'Esophageal Mucosal Relief & Motility', 'Gastroesophageal Reflux, Strictures & Hernia'],
+    description: 'Special fluoroscopic examination of the esophagus and upper GI tract to evaluate difficulty in swallowing (dysphagia), acid reflux, hiatus hernia, and strictures.',
+    isPopular: true
+  },
+  {
+    id: 'barium-enema',
+    name: 'Barium Enema',
+    category: 'special',
+    sampleType: 'Contrast Study',
+    turnaroundTime: '1 - 2 Hours',
+    fastingRequired: true,
+    fastingHours: 12,
+    preparationNote: 'Complete bowel preparation with prescribed laxative preceding the test day. Clear fluid diet prior to examination.',
+    parametersCount: 3,
+    parameters: ['Colonic Mucosal Architecture & Haustrations', 'Diverticular Disease & Polyp Screening', 'Colorectal Calibre, Obstruction & Strictures'],
+    description: 'Special fluoroscopic contrast X-ray of the large intestine (colon and rectum) to detect diverticulosis, polyps, chronic constipation causes, and colorectal lesions.'
+  },
+  {
+    id: 'rgu-mcu-cystourethrography',
+    name: 'RGU / MCU (Retrograde Urethrography / Micturating Cystourethrography)',
+    category: 'special',
+    sampleType: 'Contrast Study',
+    turnaroundTime: '1 Hour',
+    fastingRequired: false,
+    preparationNote: 'Sterile urine culture is recommended before the test. Adequate bladder filling and voiding phase instructions provided at center.',
+    parametersCount: 4,
+    parameters: [
+      'Anterior & Posterior Urethral Calibre',
+      'Urethral Stricture Location & Length',
+      'Vesicoureteral Reflux (VUR Grading)',
+      'Post-Void Residual Urine Assessment'
+    ],
+    description: 'Specialized contrast radiologic study of the lower urinary tract to diagnose anterior/posterior urethral strictures, traumatic tears, bladder diverticula, and vesicoureteral reflux (VUR).'
+  },
+  {
+    id: 'hsg-hysterosalpingography',
+    name: 'HSG (Hysterosalpingography)',
+    category: 'special',
+    sampleType: 'Contrast Study',
+    turnaroundTime: '45 - 60 Mins',
+    fastingRequired: false,
+    preparationNote: 'Conducted between Day 7 to Day 10 of menstrual cycle (post-menstrual cessation and prior to ovulation).',
+    parametersCount: 3,
+    parameters: [
+      'Uterine Cavity Morphology & Congenital Contours',
+      'Bilateral Fallopian Tube Patency (Left & Right)',
+      'Free Peritoneal Contrast Spill'
+    ],
+    description: 'Special contrast radiograph for female fertility investigation to evaluate uterine shape and confirm whether both fallopian tubes are open and patent.',
+    isPopular: true
+  },
+
+  // ===================== CARDIOLOGY =====================
+  {
+    id: 'ecg-electrocardiography',
+    name: '(E.C.G) Electrocardiography (12-Lead Computerized)',
     category: 'cardiology',
     sampleType: 'ECG / Sensor',
-    turnaroundTime: 'Instant (45 Mins)',
+    turnaroundTime: 'Instant (10 Mins)',
     fastingRequired: false,
-    preparationNote: 'No fasting required. Wear comfortable two-piece clothing.',
-    originalPrice: 2500,
-    price: 1800,
-    parametersCount: 1,
-    parameters: ['Left Ventricular Ejection Fraction (LVEF), Valvular Flow & Wall Motion Analysis'],
-    description: 'Performed directly by senior Consultant Cardiologist for cardiac valve assessment, pump function, and ischemia.'
-  },
-  {
-    id: 'cardiac-troponin-i-crp',
-    name: 'High-Sensitivity Troponin-I & hs-CRP Duo',
-    category: 'cardiology',
-    sampleType: 'Blood',
-    turnaroundTime: '2 Hours (Stat Express)',
-    fastingRequired: false,
-    preparationNote: 'Critical cardiac biomarker for acute coronary syndromes.',
-    originalPrice: 2400,
-    price: 1650,
-    parametersCount: 2,
-    parameters: ['hs-Troponin I (Quantitative)', 'High-Sensitivity C-Reactive Protein (hs-CRP)'],
-    description: 'High-sensitivity quantitative detection of subtle myocardial micro-necrosis and vascular inflammation.'
-  },
-  {
-    id: 'female-hormone-profile',
-    name: 'Women Hormone Panel (PCOS / Fertility Profile)',
-    category: 'women',
-    sampleType: 'Blood',
-    turnaroundTime: '12 Hours',
-    fastingRequired: true,
-    fastingHours: 10,
-    preparationNote: 'Ideally performed on Day 2 or Day 3 of menstrual cycle or as advised by your gynecologist.',
-    originalPrice: 3200,
-    price: 2199,
-    parametersCount: 6,
-    parameters: [
-      'Follicle Stimulating Hormone (FSH)',
-      'Luteinizing Hormone (LH)',
-      'Serum Prolactin',
-      'Total Testosterone',
-      'DHEA-S',
-      'TSH'
-    ],
-    description: 'Essential endocrine panel diagnosing Polycystic Ovary Syndrome (PCOS), ovarian reserve, and cycle regularity.'
-  },
-  {
-    id: 'urine-routine-microscopic',
-    name: 'Complete Urine Routine & Microscopic Examination',
-    category: 'pathology',
-    sampleType: 'Urine',
-    turnaroundTime: '3 Hours',
-    fastingRequired: false,
-    preparationNote: 'Clean-catch midstream early morning urine specimen in sterile container.',
-    originalPrice: 250,
-    price: 150,
-    parametersCount: 18,
-    parameters: ['Physical, Chemical, Dipstick Protein/Glucose/Ketones, Pus Cells, RBCs, Casts, Crystals, Bacteria'],
-    description: 'Comprehensive screening for urinary tract infections, proteinuria, microhematuria, and renal calculi.'
+    preparationNote: 'No fasting required. Wear comfortable clothing for chest lead placement.',
+    parametersCount: 5,
+    parameters: ['Heart Rate', 'Rhythm & Axis', 'P-QRS-T Morphology', 'Ischemia / Infarction Signs', 'Conduction Blocks'],
+    description: 'High-precision 12-lead digital electrocardiogram to detect arrhythmias, chest pain causes, and cardiac rhythm.',
+    isPopular: true
   }
 ];
 
 export const HEALTH_PACKAGES: HealthPackage[] = [
   {
-    id: 'pkg-vital-full-body',
-    name: 'Nu Vital Full Body Health Package',
-    tagline: 'Annual essential health baseline for adults aged 20–45',
-    recommendedFor: 'Working professionals, healthy adults, baseline checkup',
+    id: 'nu-complete-master-checkup',
+    name: 'Nu Master Full Body Health Package',
+    tagline: 'Complete 68-Parameter Pathology, Heart & Vital Organ Screening',
+    recommendedFor: 'Men & Women (All Age Groups, Annual Wellness Check)',
     totalParameters: 68,
+    originalPrice: 2800,
+    price: 1299,
+    fasting: '10 - 12 Hours Overnight Fasting Required',
+    reportTime: 'Same Day (Within 6 Hours)',
+    categoriesCovered: ['CBC with ESR', 'Lipid Profile', 'Liver (LFT)', 'Kidney (KFT)', 'Thyroid (TSH)', 'Blood Sugar', 'Urine R/M', 'ECG Heart Scan'],
+    keyTests: [
+      'Complete Haemogram (CBC + ESR)',
+      'Liver Function Test (LFT - 11 Parameters)',
+      'Kidney Function Test (KFT / RFT - 8 Parameters)',
+      'Lipid Profile (Cholesterol, Triglycerides, HDL, LDL)',
+      'Thyroid Stimulating Hormone (TSH)',
+      'Blood Sugar Fasting (Glucose)',
+      'Serum Calcium & Uric Acid',
+      'Complete Urine Routine & Microscopic',
+      '12-Lead Computerized ECG'
+    ],
+    featured: true
+  },
+  {
+    id: 'nu-senior-citizen-wellness',
+    name: 'Senior Citizen & Cardiac Wellness Panel',
+    tagline: 'Vital screening for hypertension, joints, bones, diabetes & heart',
+    recommendedFor: 'Adults Aged 45+ Years & Chronic Symptom Monitoring',
+    totalParameters: 54,
+    originalPrice: 3200,
+    price: 1599,
+    fasting: '10 - 12 Hours Overnight Fasting Required',
+    reportTime: 'Same Day Verified Turnaround',
+    categoriesCovered: ['Heart (Lipid + ECG)', 'Diabetes (HbA1c + Glucose)', 'Kidney & Electrolytes', 'Uric Acid & Joint Markers', 'Calcium', 'X-Ray Chest'],
+    keyTests: [
+      'HbA1c (3-Month Glycated Glucose)',
+      'Blood Sugar (Fasting & PP)',
+      'Lipid Profile Complete',
+      'Kidney Function Test with Electrolytes',
+      'Serum Uric Acid & Serum Calcium',
+      'Complete Haemogram (CBC)',
+      '12-Lead Digital ECG',
+      'Digital X-Ray Chest PA View'
+    ],
+    featured: true
+  },
+  {
+    id: 'nu-women-hormone-wellness',
+    name: 'Nu Women Hormone & Vital Health Panel',
+    tagline: 'Designed for PCOD, thyroid, anemia, calcium, and vitamin balance',
+    recommendedFor: 'Women of All Ages (Adolescent to Senior Care)',
+    totalParameters: 48,
     originalPrice: 3500,
-    price: 1499,
-    fasting: '10–12 Hours Overnight Fasting',
-    reportTime: 'Same Day by 7:00 PM',
-    categoriesCovered: [
-      'Complete Blood Count (CBC 24 Params)',
-      'Complete Lipid Profile (8 Params)',
-      'Liver Function Test (LFT 11 Params)',
-      'Kidney Function Test (KFT 8 Params)',
-      'Blood Glucose Fasting',
-      'HbA1c Glycated Sugar',
-      'Thyroid Profile (TSH)',
-      'Urine Routine & Microscopic (18 Params)'
+    price: 1699,
+    fasting: '8 - 10 Hours Fasting Recommended',
+    reportTime: 'Same Day by Evening',
+    categoriesCovered: ['Thyroid (T3, T4, TSH)', 'Vitamin D & B12', 'CBC & Anemia', 'Calcium & Bone Health', 'Blood Sugar', 'Urine R/M'],
+    keyTests: [
+      'Thyroid Profile Total (T3, T4, TSH)',
+      'Vitamin D (25-OH) & Vitamin B12 Duo',
+      'Complete Blood Count (CBC) with ESR',
+      'Serum Calcium & Iron Indicators',
+      'Blood Sugar (Fasting)',
+      'Urine Routine & Microscopic Analysis'
     ],
-    keyTests: ['CBC', 'Lipid Panel', 'Liver LFT', 'Kidney KFT', 'HbA1c', 'TSH', 'Urine R/M'],
     featured: true
   },
   {
-    id: 'pkg-executive-master',
-    name: 'Nu Executive Platinum Master Health Check',
-    tagline: 'Comprehensive organ screening + Cancer & Vitamin markers',
-    recommendedFor: 'Adults aged 35+, high-stress executives, family history of lifestyle illness',
-    totalParameters: 89,
-    originalPrice: 6500,
-    price: 2999,
-    fasting: '10–12 Hours Overnight Fasting',
-    reportTime: 'Within 24 Hours',
-    categoriesCovered: [
-      'All 68 Parameters from Vital Package',
-      'Vitamin D3 (25-OH) & Vitamin B12',
-      'Serum Calcium, Phosphorus & Iron Studies',
-      'High-Sensitivity C-Reactive Protein (hs-CRP)',
-      'Prostate PSA (Males) or CA-125 (Females)',
-      'Serum Electrolytes (Na+, K+, Cl-)',
-      'Cardiac Risk Ratios & Lipoprotein(a)'
-    ],
-    keyTests: ['Full Vital Panel', 'Vitamin D3 & B12', 'hs-CRP', 'Iron Profile', 'Electrolytes', 'Tumor Marker'],
-    featured: true
+    id: 'nu-fever-infection-screening',
+    name: 'Nu Fever & Infection Rapid Panel',
+    tagline: 'Same-day acute fever diagnostic panel for infection screening',
+    recommendedFor: 'Patients with Acute Fever, Body Aches, Chills or Fatigue',
+    totalParameters: 32,
+    originalPrice: 1800,
+    price: 799,
+    fasting: 'No Fasting Required',
+    reportTime: 'Express 2 - 3 Hours',
+    categoriesCovered: ['CBC with Platelets', 'Malaria MP/FM', 'Widal Typhoid', 'ESR', 'Urine R/M'],
+    keyTests: [
+      'Complete Haemogram (CBC) with Platelet Count',
+      'Malaria Parasite (MP / FM Smear & Card)',
+      'Widal Test (Typhoid Serology)',
+      'ESR (Inflammation Speed)',
+      'Urine Routine & Microscopic'
+    ]
   },
   {
-    id: 'pkg-senior-citizen',
-    name: 'Nu Senior Citizen Comprehensive Geriatric Care',
-    tagline: 'Specialized cardiac, renal, bone density & metabolic assessment',
-    recommendedFor: 'Seniors aged 55+, elderly parents, chronic illness management',
-    totalParameters: 82,
-    originalPrice: 5800,
-    price: 2499,
-    fasting: '10–12 Hours Overnight Fasting',
-    reportTime: 'Same Day Delivery',
-    categoriesCovered: [
-      'Comprehensive Cardiac Lipid & hs-CRP',
-      'Renal Glomerular Function (eGFR + Uric Acid)',
-      'Liver & Pancreatic Enzymes',
-      'Bone Health: Vitamin D3, Calcium, Alkaline Phosphatase',
-      'Glycemic Control (Fasting Sugar + HbA1c)',
-      'Complete Hemogram with ESR (Anemia & Infection)',
-      'Electrolyte & Fluid Balance Panel'
-    ],
-    keyTests: ['CBC & ESR', 'Kidney eGFR', 'Lipid & hs-CRP', 'Vitamin D3 & Calcium', 'HbA1c', 'Electrolytes'],
-    featured: false
-  },
-  {
-    id: 'pkg-women-wellness',
-    name: 'Nu Women Complete Wellness & Hormonal Balance',
-    tagline: 'Tailored for thyroid, PCOS, anemia, bone health & cervical screening',
-    recommendedFor: 'Women across all age groups, pregnancy planning, hormonal imbalance',
-    totalParameters: 76,
-    originalPrice: 4800,
-    price: 2199,
-    fasting: '10–12 Hours Overnight Fasting',
-    reportTime: 'Same Day Delivery',
-    categoriesCovered: [
-      'Complete Hemogram (Focus on Ferritin & Iron Deficiency)',
-      'Thyroid Profile Complete (T3, T4, TSH)',
-      'Serum Prolactin & PCOS Markers',
-      'Vitamin D3 & Calcium for Bone Health',
-      'Lipid & Liver Enzymes',
-      'Diabetes Screen (HbA1c + Fasting Glucose)',
-      'Complete Urine Profile'
-    ],
-    keyTests: ['Complete Blood Count', 'Ferritin / Iron', 'Thyroid Profile', 'Prolactin', 'Vitamin D3', 'HbA1c'],
-    featured: false
-  }
-];
-
-export const DEMO_REPORT_DATA: DiagnosticReport = {
-  reportId: 'NU-2026-94812',
-  barcode: '984029184712',
-  patientName: 'Rajesh V. Sharma',
-  patientAge: 48,
-  patientGender: 'Male',
-  referredBy: 'Dr. Anand K. Kulkarni, MD (Medicine)',
-  sampleCollectedAt: '2026-10-01 07:30 AM (Nu Health Care Home Collection)',
-  reportedAt: '2026-10-01 01:45 PM (Verified & Published)',
-  testTitle: 'Comprehensive Metabolic & Lipid Diagnostic Panel',
-  category: 'Pathology & Clinical Biochemistry',
-  overallImpression: 'Borderline elevated serum triglycerides and mildly increased HbA1c suggestive of early metabolic syndrome. Renal and liver profiles remain within normal clinical limits.',
-  clinicalRemarks: 'Advised lifestyle modification with low glycemic diet, daily aerobic exercise, and clinical correlation with consulting physician. Repeat fasting lipid evaluation recommended in 90 days.',
-  pathologist: {
-    name: 'Dr. Sunita Deshmukh, MD',
-    designation: 'Senior Consultant Clinical Pathologist (KMC #48192)',
-    regNumber: 'Nu Health Care NABL Quality Lead Assessor'
-  },
-  parameters: [
-    {
-      name: 'Fasting Blood Glucose',
-      result: 104,
-      unit: 'mg/dL',
-      referenceRange: '70 - 99',
-      minNormal: 70,
-      maxNormal: 99,
-      status: 'elevated',
-      method: 'Hexokinase Spectrophotometry'
-    },
-    {
-      name: 'HbA1c (Glycated Hemoglobin)',
-      result: 5.9,
-      unit: '%',
-      referenceRange: '4.0 - 5.6',
-      minNormal: 4.0,
-      maxNormal: 5.6,
-      status: 'elevated',
-      method: 'HPLC (Bio-Rad D-100 NGSP Certified)'
-    },
-    {
-      name: 'Serum Total Cholesterol',
-      result: 192,
-      unit: 'mg/dL',
-      referenceRange: '< 200',
-      minNormal: 120,
-      maxNormal: 200,
-      status: 'normal',
-      method: 'CHOD-PAP Enzymatic'
-    },
-    {
-      name: 'Serum Triglycerides',
-      result: 188,
-      unit: 'mg/dL',
-      referenceRange: '< 150',
-      minNormal: 50,
-      maxNormal: 150,
-      status: 'elevated',
-      method: 'GPO-PAP Enzymatic'
-    },
-    {
-      name: 'HDL Cholesterol (Protective)',
-      result: 42,
-      unit: 'mg/dL',
-      referenceRange: '> 40',
-      minNormal: 40,
-      maxNormal: 65,
-      status: 'normal',
-      method: 'Direct Immunoinhibition'
-    },
-    {
-      name: 'LDL Cholesterol (Calculated)',
-      result: 112,
-      unit: 'mg/dL',
-      referenceRange: '< 100',
-      minNormal: 50,
-      maxNormal: 100,
-      status: 'elevated',
-      method: 'Friedewald Formula'
-    },
-    {
-      name: 'Serum Creatinine',
-      result: 0.94,
-      unit: 'mg/dL',
-      referenceRange: '0.70 - 1.20',
-      minNormal: 0.70,
-      maxNormal: 1.20,
-      status: 'normal',
-      method: 'Jaffe Modified Kinetic'
-    },
-    {
-      name: 'Estimated GFR (eGFR)',
-      result: 94,
-      unit: 'mL/min/1.73m²',
-      referenceRange: '> 90',
-      minNormal: 90,
-      maxNormal: 130,
-      status: 'normal',
-      method: 'CKD-EPI 2021 Equation'
-    },
-    {
-      name: 'Serum SGPT (ALT)',
-      result: 28,
-      unit: 'U/L',
-      referenceRange: '< 45',
-      minNormal: 10,
-      maxNormal: 45,
-      status: 'normal',
-      method: 'IFCC Without Pyridoxal Phosphate'
-    },
-    {
-      name: 'Total 25-OH Vitamin D',
-      result: 18.4,
-      unit: 'ng/mL',
-      referenceRange: '30.0 - 100.0',
-      minNormal: 30.0,
-      maxNormal: 100.0,
-      status: 'low',
-      method: 'Chemiluminescence (CLIA)'
-    },
-    {
-      name: 'Vitamin B12 (Cyanocobalamin)',
-      result: 320,
-      unit: 'pg/mL',
-      referenceRange: '211 - 911',
-      minNormal: 211,
-      maxNormal: 911,
-      status: 'normal',
-      method: 'ECLIA Roche Cobas e801'
-    }
-  ]
-};
-
-export const DOCTORS_TEAM: DoctorProfile[] = [
-  {
-    name: 'Dr. Sunita Deshmukh',
-    qualification: 'MBBS, MD (Pathology), FICPath',
-    specialty: 'Clinical Pathology & Hematopathology',
-    experience: '18+ Years Experience',
-    role: 'Chief of Pathology & NABL Quality Director',
-    bio: 'Formerly with AIIMS and Tata Memorial. Specialized in automated flow cytometry, molecular genetics, and precision hematology reporting.',
-    availability: 'Mon - Sat (08:00 AM - 04:00 PM)'
-  },
-  {
-    name: 'Dr. Arvind R. Nambiar',
-    qualification: 'MBBS, MD (Radiodiagnosis), FRCR (London)',
-    specialty: 'Cross-Sectional Neuro & Musculoskeletal MRI',
-    experience: '16+ Years Experience',
-    role: 'Head of Advanced Diagnostic Radiology',
-    bio: 'Pioneer in 3-Tesla silent neuro-MRI sequence optimization, cardiac CT angiography, and fetal anomaly sonography.',
-    availability: 'Mon - Sat (09:00 AM - 06:00 PM)'
-  },
-  {
-    name: 'Dr. Pradeep V. Singhania',
-    qualification: 'MBBS, MD (Biochemistry), Ph.D.',
-    specialty: 'Clinical Biochemistry & Endocrinology',
-    experience: '14+ Years Experience',
-    role: 'Senior Consultant Biochemist',
-    bio: 'Expert in high-throughput automation platforms, immunoassays, and metabolic screening validation.',
-    availability: 'Mon - Fri (09:00 AM - 05:00 PM)'
-  },
-  {
-    name: 'Dr. Meera Chandrasekhar',
-    qualification: 'MBBS, DMRD, DNB (Radiology)',
-    specialty: 'Women’s Imaging & Fetal Sonography',
-    experience: '12+ Years Experience',
-    role: 'Senior Consultant Radiologist',
-    bio: 'Specialist in 4D fetal Doppler scans, high-resolution breast sonography, and guided core biopsy procedures.',
-    availability: 'Mon - Sat (10:00 AM - 05:00 PM)'
+    id: 'nu-pre-operative-surgical-fitness',
+    name: 'Pre-Operative Surgical Fitness Profile',
+    tagline: 'Mandatory pre-surgery profile for blood safety, viral markers & ECG',
+    recommendedFor: 'Pre-Surgical Clearance & Medical Fitness Assessment',
+    totalParameters: 40,
+    originalPrice: 2600,
+    price: 1199,
+    fasting: '8 Hours Fasting Required',
+    reportTime: 'Express Same-Day Clearance',
+    categoriesCovered: ['Viral Markers (HIV, HBsAg, HCV)', 'Blood Group & BT/CT', 'KFT & Glucose', 'CBC', 'Chest X-Ray', 'ECG'],
+    keyTests: [
+      'Blood Group & Rh Typing',
+      'BT / CT (Bleeding & Clotting Time)',
+      'HIV I & II Antibodies',
+      'HBSAG (Australia Antigen)',
+      'HCV Antibody',
+      'Serum Creatinine & Blood Urea',
+      'Blood Sugar Random / Fasting',
+      '12-Lead Computerized ECG',
+      'Digital X-Ray Chest PA View'
+    ]
   }
 ];
 
 export const DIAGNOSTIC_CENTERS: DiagnosticCenter[] = [
   {
-    name: "Group's of Nu Health Care Diagnostic (Main Center)",
-    tag: '24/7 Primary Diagnostic & Scan Center',
-    address: 'In State Bank of India Building, Near Civil Hospital, Subhash Ganj',
-    city: 'Dabra, Madhya Pradesh 475110',
+    name: "Group's of Nu Health Care Diagnostic - Dabra",
+    tag: 'Primary Diagnostic & Digital X-Ray Center',
+    address: 'In State Bank Building, Beside Civil Hospital',
+    city: 'Dabra, Madhya Pradesh',
     phone: '096176 59936',
     hours: 'Open 24 Hours · 7 Days a Week',
-    facilities: ['Automated Pathology & Biochemistry Lab', 'Digital X-Ray & Scans', 'Ultrasound & Doppler', 'ECG & Cardiac Screening', 'Doorstep Home Sample Collection', '24x7 Emergency Testing'],
+    facilities: [
+      'Automated Pathology & Biochemistry Lab',
+      'High-Frequency Digital X-Ray',
+      '12-Lead Computerized ECG',
+      'Special Radiological Studies (IVP, Barium, HSG)',
+      'Free Home & Hospital Sample Collection',
+      '24x7 Emergency Testing'
+    ],
     emergencyAvailable: true,
     parkingAvailable: true,
     homeCollectionHub: true
   },
   {
-    name: 'Nu Health Care Express Collection Center - Subhash Ganj',
-    tag: 'Express Collection & Quick Reports',
-    address: 'Near Civil Hospital Road, Subhash Ganj',
-    city: 'Dabra, Madhya Pradesh 475110',
+    name: "Group's of Nu Health Care Diagnostic - Karera",
+    tag: 'Diagnostic & Pathology Center',
+    address: 'Opposite Kamaksha Devi Temple, Near New Tehsil',
+    city: 'Karera, Madhya Pradesh',
     phone: '096176 59936',
-    hours: '06:00 AM - 10:00 PM (Daily)',
-    facilities: ['Zero-Wait Blood Sample Draw', 'Routine & Special Pathology', 'Express Fast-Track Reports', 'Home Sample Collection Fleet'],
-    emergencyAvailable: false,
-    parkingAvailable: true,
-    homeCollectionHub: true
-  },
-  {
-    name: 'Nu Health Care Diagnostic Hub - Gwalior Region',
-    tag: 'Extended Diagnostic & Referral Hub',
-    address: 'Serving Dabra, Gwalior & Neighboring Regions',
-    city: 'Gwalior Division, Madhya Pradesh',
-    phone: '096176 59936',
-    hours: 'Open 24 Hours Support',
-    facilities: ['Advanced Hormonal & Cancer Markers', 'Executive Master Health Packages', 'Digital Imaging & Radiology', 'Home Sample Pickup Across Dabra'],
+    hours: '06:30 AM - 09:30 PM (Daily)',
+    facilities: [
+      'Fully Automated Blood Pathology',
+      'Digital X-Ray & 12-Lead ECG',
+      'Hormone, Thyroid & Vitamin Panels',
+      'Routine & Emergency Blood Tests',
+      'Doorstep Home Sample Collection',
+      'Same-Day WhatsApp & Printed Reports'
+    ],
     emergencyAvailable: true,
     parkingAvailable: true,
     homeCollectionHub: true
@@ -578,44 +826,44 @@ export const ACCREDITATIONS = [
   {
     title: 'NABL ISO 15189:2022',
     subtitle: 'National Accreditation Board for Testing and Calibration Laboratories',
-    certNo: 'MC-3918 / Valid thru 2028'
+    certNo: 'Certified Laboratory Standards'
   },
   {
-    title: 'CAP Accredited',
-    subtitle: 'College of American Pathologists External Proficiency Certified',
-    certNo: 'CAP #89104-A'
+    title: 'CAP Compliant Protocols',
+    subtitle: 'College of American Pathologists Proficiency Benchmark',
+    certNo: 'Proficiency Quality Standard'
   },
   {
-    title: 'AERB Approved',
-    subtitle: 'Atomic Energy Regulatory Board Certified Radiation Safety Standard',
-    certNo: 'AERB/RSD/MED-2024'
+    title: 'AERB Certified',
+    subtitle: 'Atomic Energy Regulatory Board Certified Radiation Safety for Digital X-Ray',
+    certNo: 'AERB Safety Compliance'
   },
   {
     title: 'ICMR Registered',
-    subtitle: 'Indian Council of Medical Research Certified Molecular Center',
-    certNo: 'ICMR-NUHC-BLR-09'
+    subtitle: 'Indian Council of Medical Research Certified Diagnostics',
+    certNo: 'National Quality Adherence'
   }
 ];
 
 export const PATIENT_FAQS = [
   {
     q: 'How does Nu Health Care Free Home Sample Collection service work?',
-    a: 'Simply select your tests or packages online, choose your preferred morning or evening 1-hour slot, and provide your address. Our certified, vaccinated phlebotomist arrives equipped with single-use sterile vacutainers, alcohol wipes, and a temperature-monitored cold-chain carrier box. Barcodes are pasted in front of you.'
+    a: 'To book a home or hospital sample collection, select your desired tests online or call/WhatsApp our 24x7 helpline at 096176 59936. Our certified technician arrives at your preferred time equipped with sterile vacuum tubes and a cold-chain kit to collect samples safely.'
   },
   {
-    q: 'What are the fasting guidelines for blood tests like Lipid and Glucose?',
-    a: 'For Fasting Blood Sugar, Lipid Profile, and Full Body Checkups, overnight fasting for 10 to 12 hours is required. You can drink plain water to stay well hydrated (which actually helps veins dilate for an easy, painless blood draw), but avoid tea, coffee, milk, juices, breakfast, or smoking.'
+    q: 'What are the fasting guidelines for blood tests like Lipid, LFT and Glucose?',
+    a: 'For Fasting Blood Sugar, Lipid Profile (Cholesterol), and full body master packages, 8 to 12 hours of overnight fasting is required. You can drink plain water, but avoid tea, coffee, milk, breakfast, or medications until after sample collection.'
   },
   {
     q: 'How soon will I receive my official diagnostic report?',
-    a: 'Routine blood tests (CBC, Glucose, Liver & Kidney profiles) are processed within 4 to 6 hours. Specialized tests like Vitamin D, Thyroid, and HbA1c are released same-day by 7:00 PM. High-resolution MRI and CT scans are reported by senior Radiologists within 6 to 8 hours. You will receive an SMS and WhatsApp message with a direct download link immediately upon pathologist sign-off.'
+    a: 'Most routine blood tests (CBC, ESR, Glucose, LFT, KFT) are completed within 3 to 6 hours. Digital X-Ray and ECG reports are delivered within 15 to 30 minutes. All verified reports are sent directly to your WhatsApp and SMS.'
   },
   {
     q: 'Can I upload a handwritten prescription from my doctor?',
-    a: 'Yes! Use our "Upload Doctor\'s Prescription" button. Our medical transcription team reviews the prescription, itemizes the exact required tests, applies available package discounts, and contacts you within 15 minutes to confirm your preferred appointment.'
+    a: 'Yes! Click the "Upload Prescription" button on our website to upload a clear photo of your doctor\'s prescription. Our clinical team will review the required tests and contact you within 15 minutes.'
   },
   {
-    q: 'Are Nu Health Care diagnostic reports accepted by all hospitals, doctors, and insurance TPAs?',
-    a: 'Absolutely. Group\'s of Nu Health Care Diagnostic is NABL (ISO 15189:2022) accredited and ICMR approved. Our digital reports come with QR code verification, doctor electronic signatures, and medical council registration numbers, universally accepted across all major hospitals, visa authorities, and insurance TPAs nationwide.'
+    q: 'Are Nu Health Care diagnostic reports accepted by all hospitals and doctors?',
+    a: 'Yes, all reports from Group\'s of Nu Health Care Diagnostic adhere to NABL standards with verified digital signatures and QR code authentication, accepted universally by all hospitals and physicians.'
   }
 ];

@@ -28,49 +28,55 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-orange-100 shadow-xs">
       {/* Top Ribbon - Clinical Navy & Warm Accents */}
-      <div className="bg-[#0b1e33] text-slate-300 text-xs px-4 sm:px-6 py-2 border-b border-slate-800">
+      <div className="bg-[#0b1e33] text-slate-300 text-[11px] px-4 sm:px-6 py-1 border-b border-slate-800">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1.5 text-[#F37920] font-semibold">
-              <ShieldCheck className="w-3.5 h-3.5 text-[#F37920]" />
-              NABL & ISO 15189:2022 Accredited Diagnostic Center
+            <span className="flex items-center gap-1 text-[#F37920] font-semibold">
+              <ShieldCheck className="w-3 h-3 text-[#F37920]" />
+              NABL & ISO Accredited Diagnostic Center
             </span>
             <span className="hidden md:inline text-slate-600">·</span>
-            <span className="hidden md:inline text-slate-300">
-              Zero-Touch Barcoded Vacuum Blood Collection
+            <span className="hidden md:inline text-slate-300 text-[11px]">
+              Home & Hospital Sample Collection Available
             </span>
           </div>
-          <div className="flex items-center gap-4 text-xs font-mono">
+          <div className="flex items-center gap-3 text-[11px] font-mono">
             <a 
               href="tel:+919617659936" 
-              className="flex items-center gap-1.5 text-white hover:text-[#F37920] transition-colors"
+              className="flex items-center gap-1 text-white hover:text-[#F37920] transition-colors"
             >
               <Phone className="w-3 h-3 text-[#D32F2F]" />
-              <span className="font-semibold">24x7 Helpline: 096176 59936</span>
+              <span className="font-semibold">24x7: 096176 59936</span>
             </a>
             <span className="hidden sm:inline text-slate-600">|</span>
             <div className="hidden sm:flex items-center gap-1 text-slate-300">
               <Clock className="w-3 h-3 text-[#F37920]" />
-              <span>Express Reports in 6 Hrs</span>
+              <span>Reports in 4-6 Hrs</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Main Top Bar Contract: Zone 1 (Logo & Brand) - Zone 2 (4-6 Nav Links) - Zone 3 (Primary Actions) */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-4">
+      {/* Main Top Bar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-2 flex items-center justify-between gap-3">
         
-        {/* Zone 1: Brand Wordmark with Exact Uploaded Logo */}
+        {/* Zone 1: Brand Logo */}
         <button 
           onClick={() => handleNavClick('hero')} 
           className="text-left group flex items-center gap-2 focus:outline-none cursor-pointer"
           aria-label="Nu Health Care Diagnostic Homepage"
         >
-          <NuHealthcareLogo className="h-10 sm:h-12 w-auto" />
+          <NuHealthcareLogo className="h-8 sm:h-9 w-auto" />
         </button>
 
-        {/* Zone 2: 4-6 Clean Text Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 text-sm font-semibold text-slate-700">
+        {/* Zone 2: Clean Text Navigation Links */}
+        <nav className="hidden lg:flex items-center gap-5 xl:gap-7 text-sm font-semibold text-slate-700">
+          <button 
+            onClick={() => handleNavClick('special-procedures')}
+            className="text-[#E86A17] hover:text-[#0066B2] transition-colors py-1 cursor-pointer font-bold flex items-center gap-1"
+          >
+            <span>Special Procedures</span>
+          </button>
           <button 
             onClick={() => handleNavClick('tests')}
             className="hover:text-[#F37920] transition-colors py-1 cursor-pointer"
@@ -87,7 +93,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNavClick('facilities')}
             className="hover:text-[#F37920] transition-colors py-1 cursor-pointer"
           >
-            Facilities & 3T MRI
+            Facilities
           </button>
           <button 
             onClick={() => handleNavClick('process')}
@@ -100,7 +106,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNavClick('centers')}
             className="hover:text-[#F37920] transition-colors py-1 cursor-pointer"
           >
-            Centers & Doctors
+            Centers
           </button>
         </nav>
 
@@ -154,6 +160,12 @@ export const Header: React.FC<HeaderProps> = ({
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2 shadow-xl">
           <button
+            onClick={() => handleNavClick('special-procedures')}
+            className="block w-full text-left px-3 py-2 rounded-md text-sm font-bold text-[#E86A17] bg-orange-50 hover:bg-orange-100"
+          >
+            ★ Special Procedures (IVP, HSG, Barium)
+          </button>
+          <button
             onClick={() => handleNavClick('tests')}
             className="block w-full text-left px-3 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-[#F37920]"
           >
@@ -169,7 +181,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNavClick('facilities')}
             className="block w-full text-left px-3 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-[#F37920]"
           >
-            3T MRI & Laboratory Technology
+            Digital X-Ray & Lab Technology
           </button>
           <button
             onClick={() => handleNavClick('process')}
@@ -181,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => handleNavClick('centers')}
             className="block w-full text-left px-3 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-[#F37920]"
           >
-            Centers & Specialist Doctors
+            Diagnostic Centers & Location
           </button>
           <button
             onClick={() => handleNavClick('faq')}

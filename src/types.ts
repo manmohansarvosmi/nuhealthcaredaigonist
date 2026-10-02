@@ -1,24 +1,25 @@
 export type TestCategory = 
   | 'all'
   | 'popular'
+  | 'special'
   | 'pathology'
-  | 'radiology'
+  | 'xray'
+  | 'gynae'
   | 'cardiology'
-  | 'diabetes'
   | 'vitamins'
-  | 'women';
+  | 'culture';
 
 export interface DiagnosticTest {
   id: string;
   name: string;
-  category: 'pathology' | 'radiology' | 'cardiology' | 'diabetes' | 'vitamins' | 'women';
-  sampleType: 'Blood' | 'Urine' | 'Imaging Scan' | 'ECG / Sensor' | 'Swab';
+  category: 'special' | 'pathology' | 'xray' | 'gynae' | 'cardiology' | 'vitamins' | 'culture' | 'popular';
+  sampleType: 'Blood' | 'Urine' | 'Digital X-Ray' | 'ECG / Sensor' | 'Swab' | 'Sputum' | 'Semen' | 'Contrast Study';
   turnaroundTime: string;
   fastingRequired: boolean;
   fastingHours?: number;
   preparationNote: string;
-  originalPrice: number;
-  price: number;
+  originalPrice?: number;
+  price?: number;
   parametersCount: number;
   parameters: string[];
   description: string;

@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { Search, ArrowRight, Shield, Clock, Home, FileText, CheckCircle2, ChevronRight } from 'lucide-react';
+import { 
+  Search, 
+  Home, 
+  Clock, 
+  Shield, 
+  CheckCircle2, 
+  ArrowRight, 
+  ChevronRight,
+  PhoneCall
+} from 'lucide-react';
 import { DIAGNOSTIC_TESTS, HEALTH_PACKAGES } from '../data/diagnosticData';
 import { DiagnosticTest, HealthPackage } from '../types';
 
@@ -23,82 +32,94 @@ export const Hero: React.FC<HeroProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchFocused, setIsSearchFocused] = useState(false);
 
-  // Search filtering
-  const filteredTests = searchQuery.trim() === '' ? [] : DIAGNOSTIC_TESTS.filter(test => 
-    test.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    test.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    test.parameters.some(p => p.toLowerCase().includes(searchQuery.toLowerCase()))
-  ).slice(0, 5);
+  // Autocomplete filtering
+  const filteredTests = searchQuery.trim() === '' 
+    ? [] 
+    : DIAGNOSTIC_TESTS.filter(t => 
+        t.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        t.parameters.some(p => p.toLowerCase().includes(searchQuery.toLowerCase()))
+      ).slice(0, 5);
 
-  const filteredPackages = searchQuery.trim() === '' ? [] : HEALTH_PACKAGES.filter(pkg =>
-    pkg.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    pkg.recommendedFor.toLowerCase().includes(searchQuery.toLowerCase())
-  ).slice(0, 3);
+  const filteredPackages = searchQuery.trim() === ''
+    ? []
+    : HEALTH_PACKAGES.filter(p =>
+        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        p.keyTests.some(k => k.toLowerCase().includes(searchQuery.toLowerCase()))
+      ).slice(0, 3);
 
   const hasResults = filteredTests.length > 0 || filteredPackages.length > 0;
 
   return (
-    <section id="hero" className="relative bg-gradient-to-b from-orange-50/50 via-white to-white pt-8 pb-16 lg:pt-12 lg:pb-24 border-b border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="relative overflow-hidden bg-gradient-to-b from-orange-50/40 via-white to-slate-50 border-b border-slate-200">
+      
+      {/* Background Architectural Grid Accents */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-60 pointer-events-none" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 pt-5 sm:pt-7 pb-8 sm:pb-10">
         
-        {/* Main Hero Grid */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
           
-          {/* Left Column: Proposition, Value, Search, CTAs */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Left Column: Hero Copy & Search Hub */}
+          <div className="lg:col-span-7 space-y-3.5">
             
-            {/* Zero-Pill Quiet Editorial Trust Marker with Nu Theme Colors */}
-            <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#E86A17] tracking-wider uppercase font-mono">
+            {/* Trust Marker */}
+            <div className="flex flex-wrap items-center gap-2 text-[11px] font-bold text-[#E86A17] tracking-wider uppercase font-mono">
               <span className="text-[#D32F2F]">GROUP'S OF</span>
               <span>NU HEALTH CARE DIAGNOSTIC</span>
               <span aria-hidden="true" className="text-slate-400">·</span>
-              <span className="text-[#0066B2]">NABL (ISO 15189) ACCREDITED</span>
+              <span className="text-[#0066B2]">NABL ACCREDITED</span>
               <span aria-hidden="true" className="text-slate-400">·</span>
-              <span className="text-slate-600">ICMR APPROVED</span>
+              <span className="text-slate-600">DABRA (GWALIOR)</span>
             </div>
 
             {/* Display Headline */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.14] text-balance font-display">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight text-balance font-display">
               Precision Diagnostics. Caring Hands. Faster Answers.
             </h1>
 
+            {/* Notice Callout from Prescription Image */}
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-amber-500 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-2xs">
+              <Home className="w-3.5 h-3.5" />
+              <span>Home & Hospital Sample Collection Available</span>
+            </div>
+
             {/* Editorial Value Subtitle */}
-            <p className="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-              Equipped with advanced 3.0-Tesla Silent MRI, 128-Slice Low-Dose CT, and fully automated robotic pathology. Every diagnostic report is audited and verified with double MD sign-off within 6 hours.
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-2xl">
+              Equipped with fully automated NABL pathology, digital X-ray, special contrast procedures (IVP, Barium, HSG, RGU/MCU), 12-lead ECG, and trained phlebotomists. Verified reports delivered on WhatsApp within 4 to 6 hours.
             </p>
 
             {/* Interactive Live Search Box */}
             <div className="relative max-w-xl">
               <div className="relative flex items-center">
-                <Search className="absolute left-4 w-5 h-5 text-slate-400 pointer-events-none" />
+                <Search className="absolute left-3.5 w-4 h-4 text-slate-400 pointer-events-none" />
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   onFocus={() => setIsSearchFocused(true)}
-                  placeholder="Search 600+ tests (e.g. CBC, Vitamin D, MRI Brain, Thyroid)..."
-                  className="w-full pl-12 pr-28 py-3.5 bg-white border border-slate-300 rounded-xl text-sm text-slate-900 placeholder-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F37920]/30 focus:border-[#F37920] transition-all"
+                  placeholder="Search tests (e.g. CBC, Widal, LFT, KFT, X-Ray, Thyroid)..."
+                  className="w-full pl-10 pr-24 py-2.5 bg-white border border-slate-300 rounded-lg text-xs text-slate-900 placeholder-slate-400 shadow-2xs focus:outline-none focus:ring-2 focus:ring-[#F37920]/30 focus:border-[#F37920] transition-all"
                 />
                 <button
                   onClick={onExploreTests}
-                  className="absolute right-2 px-4 py-2 bg-[#0066B2] hover:bg-[#0b548f] text-white rounded-lg text-xs font-bold transition-colors flex items-center gap-1 cursor-pointer"
+                  className="absolute right-1.5 px-3 py-1.5 bg-[#0066B2] hover:bg-[#0b548f] text-white rounded-md text-[11px] font-bold transition-colors flex items-center gap-1 cursor-pointer"
                 >
                   <span>Explore</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3 h-3" />
                 </button>
               </div>
 
-              {/* Autocomplete Dropdown */}
+              {/* Autocomplete Dropdown Without Prices */}
               {isSearchFocused && searchQuery.trim() !== '' && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl border border-orange-200 z-50 overflow-hidden divide-y divide-slate-100 max-h-96 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white rounded-xl shadow-2xl border border-orange-200 z-50 overflow-hidden divide-y divide-slate-100 max-h-80 overflow-y-auto">
                   {hasResults ? (
                     <>
                       {filteredTests.length > 0 && (
-                        <div className="p-3">
-                          <div className="text-[11px] font-bold text-[#E86A17] uppercase tracking-wider mb-2 px-2">
-                            Nu Health Care Diagnostic Tests & Scans
+                        <div className="p-2.5">
+                          <div className="text-[10px] font-bold text-[#E86A17] uppercase tracking-wider mb-1 px-2">
+                            Diagnostic Tests & Digital X-Ray
                           </div>
-                          <div className="space-y-1">
+                          <div className="space-y-0.5">
                             {filteredTests.map(test => (
                               <button
                                 key={test.id}
@@ -107,13 +128,13 @@ export const Hero: React.FC<HeroProps> = ({
                                   setIsSearchFocused(false);
                                   setSearchQuery('');
                                 }}
-                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-orange-50/70 flex items-center justify-between group transition-colors cursor-pointer"
+                                className="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-orange-50/70 flex items-center justify-between group transition-colors cursor-pointer"
                               >
                                 <div>
                                   <div className="text-xs font-semibold text-slate-900 group-hover:text-[#F37920]">
                                     {test.name}
                                   </div>
-                                  <div className="text-[11px] text-slate-500 flex items-center gap-2 mt-0.5">
+                                  <div className="text-[10px] text-slate-500 flex items-center gap-1.5 mt-0.5">
                                     <span>{test.sampleType}</span>
                                     <span>·</span>
                                     <span>{test.turnaroundTime}</span>
@@ -125,10 +146,9 @@ export const Hero: React.FC<HeroProps> = ({
                                     )}
                                   </div>
                                 </div>
-                                <div className="text-right">
-                                  <div className="text-xs font-bold text-slate-900 font-mono">₹{test.price}</div>
-                                  <div className="text-[10px] text-slate-400 line-through font-mono">₹{test.originalPrice}</div>
-                                </div>
+                                <span className="text-[11px] font-bold text-[#0066B2] group-hover:text-[#F37920]">
+                                  Select & Book →
+                                </span>
                               </button>
                             ))}
                           </div>
@@ -136,11 +156,11 @@ export const Hero: React.FC<HeroProps> = ({
                       )}
 
                       {filteredPackages.length > 0 && (
-                        <div className="p-3 bg-orange-50/40">
-                          <div className="text-[11px] font-bold text-[#0066B2] uppercase tracking-wider mb-2 px-2">
-                            Curated Master Health Check Packages
+                        <div className="p-2.5 bg-orange-50/40">
+                          <div className="text-[10px] font-bold text-[#0066B2] uppercase tracking-wider mb-1 px-2">
+                            Master Health Packages
                           </div>
-                          <div className="space-y-1">
+                          <div className="space-y-0.5">
                             {filteredPackages.map(pkg => (
                               <button
                                 key={pkg.id}
@@ -149,20 +169,19 @@ export const Hero: React.FC<HeroProps> = ({
                                   setIsSearchFocused(false);
                                   setSearchQuery('');
                                 }}
-                                className="w-full text-left px-3 py-2 rounded-lg hover:bg-white flex items-center justify-between group transition-colors border border-transparent hover:border-orange-200 cursor-pointer"
+                                className="w-full text-left px-2.5 py-1.5 rounded-lg hover:bg-white flex items-center justify-between group transition-colors border border-transparent hover:border-orange-200 cursor-pointer"
                               >
                                 <div>
                                   <div className="text-xs font-semibold text-slate-900 group-hover:text-[#F37920]">
                                     {pkg.name}
                                   </div>
-                                  <div className="text-[11px] text-slate-500 mt-0.5">
+                                  <div className="text-[10px] text-slate-500 mt-0.5">
                                     {pkg.totalParameters} Parameters · {pkg.fasting}
                                   </div>
                                 </div>
-                                <div className="text-right">
-                                  <div className="text-xs font-bold text-[#E86A17] font-mono">₹{pkg.price}</div>
-                                  <div className="text-[10px] text-slate-400 line-through font-mono">₹{pkg.originalPrice}</div>
-                                </div>
+                                <span className="text-[11px] font-bold text-[#E86A17]">
+                                  View Package →
+                                </span>
                               </button>
                             ))}
                           </div>
@@ -170,7 +189,7 @@ export const Hero: React.FC<HeroProps> = ({
                       )}
                     </>
                   ) : (
-                    <div className="p-6 text-center text-xs text-slate-500">
+                    <div className="p-4 text-center text-xs text-slate-500">
                       No exact match for "{searchQuery}". Call our 24x7 helpline 096176 59936 or browse catalog below.
                     </div>
                   )}
@@ -179,65 +198,65 @@ export const Hero: React.FC<HeroProps> = ({
             </div>
 
             {/* Quick-Action Decision Row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-1">
               <button
                 onClick={onExploreTests}
-                className="p-3.5 bg-white hover:bg-orange-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-[#F37920]/60 hover:shadow-xs group cursor-pointer"
+                className="p-2.5 sm:p-3 bg-white hover:bg-orange-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-[#F37920]/60 hover:shadow-2xs group cursor-pointer"
               >
-                <div className="w-8 h-8 rounded-lg bg-orange-100 text-[#E86A17] flex items-center justify-center mb-2 group-hover:bg-[#F37920] group-hover:text-white transition-colors">
-                  <Search className="w-4 h-4" />
+                <div className="w-7 h-7 rounded-lg bg-orange-100 text-[#E86A17] flex items-center justify-center mb-1.5 group-hover:bg-[#F37920] group-hover:text-white transition-colors">
+                  <Search className="w-3.5 h-3.5" />
                 </div>
                 <div className="text-xs font-bold text-slate-900">Book Test</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">600+ Path & Scans</div>
+                <div className="text-[10px] text-slate-500 mt-0.5">48+ Path, X-Ray & Specials</div>
               </button>
 
               <button
                 onClick={onOpenHomeBooking}
-                className="p-3.5 bg-white hover:bg-orange-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-[#F37920]/60 hover:shadow-xs group cursor-pointer"
+                className="p-2.5 sm:p-3 bg-white hover:bg-orange-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-[#F37920]/60 hover:shadow-2xs group cursor-pointer"
               >
-                <div className="w-8 h-8 rounded-lg bg-orange-100 text-[#E86A17] flex items-center justify-center mb-2 group-hover:bg-[#F37920] group-hover:text-white transition-colors">
-                  <Home className="w-4 h-4" />
+                <div className="w-7 h-7 rounded-lg bg-orange-100 text-[#E86A17] flex items-center justify-center mb-1.5 group-hover:bg-[#F37920] group-hover:text-white transition-colors">
+                  <Home className="w-3.5 h-3.5" />
                 </div>
                 <div className="text-xs font-bold text-slate-900">Home Visit</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">Free sample pickup</div>
+                <div className="text-[10px] text-slate-500 mt-0.5">Free sample pickup</div>
               </button>
 
               <button
                 onClick={onGoToReports}
-                className="p-3.5 bg-white hover:bg-emerald-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-emerald-500/60 hover:shadow-xs group cursor-pointer"
+                className="p-2.5 sm:p-3 bg-white hover:bg-emerald-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-emerald-500/60 hover:shadow-2xs group cursor-pointer"
               >
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                  <Clock className="w-4 h-4" />
+                <div className="w-7 h-7 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-1.5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                  <Clock className="w-3.5 h-3.5" />
                 </div>
                 <div className="text-xs font-bold text-slate-900">How It Works</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">4-step easy process</div>
+                <div className="text-[10px] text-slate-500 mt-0.5">4-step process</div>
               </button>
 
               <button
                 onClick={onOpenPrescription}
-                className="p-3.5 bg-white hover:bg-red-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-[#D32F2F]/60 hover:shadow-xs group cursor-pointer"
+                className="p-2.5 sm:p-3 bg-white hover:bg-red-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-[#D32F2F]/60 hover:shadow-2xs group cursor-pointer"
               >
-                <div className="w-8 h-8 rounded-lg bg-red-50 text-[#D32F2F] flex items-center justify-center mb-2 group-hover:bg-[#D32F2F] group-hover:text-white transition-colors">
-                  <Shield className="w-4 h-4" />
+                <div className="w-7 h-7 rounded-lg bg-red-50 text-[#D32F2F] flex items-center justify-center mb-1.5 group-hover:bg-[#D32F2F] group-hover:text-white transition-colors">
+                  <Shield className="w-3.5 h-3.5" />
                 </div>
                 <div className="text-xs font-bold text-slate-900">Upload Rx</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">15-min callback</div>
+                <div className="text-[10px] text-slate-500 mt-0.5">15-min callback</div>
               </button>
             </div>
 
-            {/* Zero-Pill Quantitative Rigor Strip */}
-            <div className="pt-4 border-t border-slate-200 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-slate-600 font-mono">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#F37920] shrink-0" />
-                <span className="font-bold text-slate-900">1.2M+</span> Samples Tested
+            {/* Quantitative Rigor Strip */}
+            <div className="pt-2.5 border-t border-slate-200 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-[11px] text-slate-600 font-mono">
+              <div className="flex items-center gap-1">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#F37920] shrink-0" />
+                <span className="font-bold text-slate-900">24x7</span> Emergency
               </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#F37920] shrink-0" />
-                <span className="font-bold text-slate-900">6-Hour</span> Routine Turnaround
+              <div className="flex items-center gap-1">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#F37920] shrink-0" />
+                <span className="font-bold text-slate-900">4-Hour</span> Reports
               </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4 text-[#0066B2] shrink-0" />
-                <span className="font-bold text-slate-900">99.84%</span> Analytical Accuracy
+              <div className="flex items-center gap-1">
+                <CheckCircle2 className="w-3.5 h-3.5 text-[#0066B2] shrink-0" />
+                <span className="font-bold text-slate-900">100%</span> Sterile Collection
               </div>
             </div>
 
@@ -245,7 +264,7 @@ export const Hero: React.FC<HeroProps> = ({
 
           {/* Right Column: Hero High-Fidelity Visual Carrier */}
           <div className="lg:col-span-5 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-orange-200/80 aspect-[16/10] bg-slate-950">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-orange-200/80 aspect-[16/10] bg-slate-950">
               <img
                 src="/src/assets/images/hero_diagnostic_lab_1790917833738.jpg"
                 alt="Nu Health Care Diagnostic modern laboratory center"
@@ -257,33 +276,33 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent" />
 
               {/* In-Frame Clinical Badge Overlay */}
-              <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md rounded-xl p-3.5 border border-white/40 shadow-lg flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-[#F37920] text-white flex items-center justify-center shrink-0 shadow-xs">
-                    <Clock className="w-5 h-5 text-white" />
+              <div className="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md rounded-xl p-2.5 border border-white/40 shadow-md flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-[#F37920] text-white flex items-center justify-center shrink-0 shadow-2xs">
+                    <Clock className="w-4 h-4 text-white" />
                   </div>
                   <div>
-                    <div className="text-xs font-bold text-slate-900">Nu Health Care Express Reporting</div>
-                    <div className="text-[11px] text-slate-500 font-mono">Results on SMS, WhatsApp & Secure Portal</div>
+                    <div className="text-xs font-bold text-slate-900">Nu Health Care Express Reports</div>
+                    <div className="text-[10px] text-slate-500 font-mono">Results on WhatsApp & SMS</div>
                   </div>
                 </div>
-                <button
-                  onClick={onGoToReports}
-                  className="px-3 py-1.5 bg-[#0066B2] hover:bg-[#0b548f] text-white rounded-lg text-xs font-bold flex items-center gap-1 transition-colors shrink-0 cursor-pointer"
+                <a
+                  href="tel:+919617659936"
+                  className="px-2.5 py-1 bg-[#0066B2] hover:bg-[#0b548f] text-white rounded-md text-[11px] font-bold flex items-center gap-1 transition-colors shrink-0 font-mono"
                 >
-                  <span>Portal</span>
-                  <ChevronRight className="w-3.5 h-3.5" />
-                </button>
+                  <PhoneCall className="w-3 h-3" />
+                  <span>Call 24x7</span>
+                </a>
               </div>
             </div>
 
             {/* Secondary Floating Trust Text */}
-            <div className="hidden sm:flex items-center justify-between mt-3 px-2 text-xs text-slate-500 font-medium">
-              <span>Automated Roche & Abbott Analyzers</span>
+            <div className="hidden sm:flex items-center justify-between mt-2 px-1 text-[11px] text-slate-500 font-medium">
+              <span>Automated Pathology</span>
               <span>·</span>
-              <span>Barcoded Zero-Touch Safety</span>
+              <span>Digital Direct X-Ray</span>
               <span>·</span>
-              <span>Cold-Chain Phlebotomy</span>
+              <span>Doorstep Blood Collection</span>
             </div>
 
           </div>

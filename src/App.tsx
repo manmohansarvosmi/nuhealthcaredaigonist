@@ -7,10 +7,10 @@ import React, { useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { FacilitiesBento } from './components/FacilitiesBento';
+import { SpecialProceduresSection } from './components/SpecialProceduresSection';
 import { TestCatalog } from './components/TestCatalog';
 import { HealthPackages } from './components/HealthPackages';
 import { HowItWorks } from './components/HowItWorks';
-import { DoctorsTeam } from './components/DoctorsTeam';
 import { BranchesSection } from './components/BranchesSection';
 import { TestimonialsAndFaq } from './components/TestimonialsAndFaq';
 import { Footer } from './components/Footer';
@@ -147,6 +147,15 @@ export default function App() {
           onExploreScans={() => scrollToSection('tests')}
         />
 
+        {/* Dedicated Special Procedures Section (IVP, Barium Swallow, Barium Enema, RGU/MCU, HSG) */}
+        <SpecialProceduresSection
+          onBookProcedure={(test) => handleBookTestDirect(test)}
+          onOpenHomeBooking={() => {
+            setSelectedBookingContext('Special Procedure Inquiry');
+            setIsHomeBookingOpen(true);
+          }}
+        />
+
         {/* Searchable Tests & Scans Catalog */}
         <TestCatalog
           cart={cart}
@@ -170,9 +179,6 @@ export default function App() {
           onOpenPrescription={() => setIsPrescriptionOpen(true)}
           onExploreTests={() => scrollToSection('tests')}
         />
-
-        {/* Senior Medical Leadership & Pathologists */}
-        <DoctorsTeam />
 
         {/* Diagnostic Centers & Branches */}
         <BranchesSection />

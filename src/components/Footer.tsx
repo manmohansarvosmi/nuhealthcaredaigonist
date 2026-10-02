@@ -17,8 +17,8 @@ export const Footer: React.FC<FooterProps> = ({
     <footer className="bg-[#071524] text-slate-400 text-xs border-t border-slate-800">
       
       {/* Upper Main Footer Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 lg:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
           
           {/* Brand Column */}
           <div className="lg:col-span-2 space-y-4">
@@ -27,7 +27,7 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
             
             <p className="text-xs text-slate-300 leading-relaxed max-w-sm">
-              Group's of Nu Health Care Diagnostic is a premier clinical facility offering 3.0 Tesla Silent MRI, 128-Slice Low-Dose CT, 4D Ultrasound, and automated robotic pathology with prompt 6-hour verified turnaround.
+              Group's of Nu Health Care Diagnostic is a premier clinical facility offering fully automated NABL pathology, high-frequency digital X-Ray, 12-lead ECG, and doorstep home sample collection with verified same-day turnaround.
             </p>
 
             <div className="flex items-center gap-2 text-[#F37920] text-xs font-mono font-semibold">
@@ -47,8 +47,18 @@ export const Footer: React.FC<FooterProps> = ({
                 <span>care@nuhealthcarediagnostic.com</span>
               </div>
               <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#F37920] shrink-0 mt-0.5" />
+                <div>
+                  <div className="font-semibold text-white">Dabra Center:</div>
+                  <span>In State Bank Building, Beside Civil Hospital, Dabra (M.P.)</span>
+                </div>
+              </div>
+              <div className="flex items-start gap-2">
                 <MapPin className="w-3.5 h-3.5 text-[#0066B2] shrink-0 mt-0.5" />
-                <span>In State Bank of India Building, Near Civil Hospital, Subhash Ganj, Dabra, Madhya Pradesh 475110</span>
+                <div>
+                  <div className="font-semibold text-white">Karera Center:</div>
+                  <span>Opposite Kamaksha Devi Temple, Near New Tehsil, Karera (M.P.)</span>
+                </div>
               </div>
             </div>
           </div>
@@ -64,7 +74,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectNav('tests')}
                   className="hover:text-[#F37920] transition-colors text-left"
                 >
-                  Complete Blood Count (CBC)
+                  Complete Blood Count (CBC & ESR)
                 </button>
               </li>
               <li>
@@ -72,7 +82,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectNav('tests')}
                   className="hover:text-[#F37920] transition-colors text-left"
                 >
-                  3.0 Tesla Silent MRI Brain & Spine
+                  Digital X-Ray Chest AP/PA View
                 </button>
               </li>
               <li>
@@ -80,7 +90,7 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectNav('tests')}
                   className="hover:text-[#F37920] transition-colors text-left"
                 >
-                  128-Slice HRCT Chest
+                  Liver & Kidney Function Tests (LFT/KFT)
                 </button>
               </li>
               <li>
@@ -88,7 +98,15 @@ export const Footer: React.FC<FooterProps> = ({
                   onClick={() => onSelectNav('tests')}
                   className="hover:text-[#F37920] transition-colors text-left"
                 >
-                  4D Ultrasound & Color Doppler
+                  Special Studies (IVP, Barium, HSG, RGU/MCU)
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => onSelectNav('tests')}
+                  className="hover:text-[#F37920] transition-colors text-left"
+                >
+                  12-Lead Computerized ECG
                 </button>
               </li>
               <li>
