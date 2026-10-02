@@ -42,11 +42,11 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
           <div className="flex items-center gap-4 text-xs font-mono">
             <a 
-              href="tel:+918049208800" 
+              href="tel:+919617659936" 
               className="flex items-center gap-1.5 text-white hover:text-[#F37920] transition-colors"
             >
               <Phone className="w-3 h-3 text-[#D32F2F]" />
-              <span className="font-semibold">24x7 Helpline: (080) 4920-8800</span>
+              <span className="font-semibold">24x7 Helpline: 096176 59936</span>
             </a>
             <span className="hidden sm:inline text-slate-600">|</span>
             <div className="hidden sm:flex items-center gap-1 text-slate-300">
@@ -90,11 +90,11 @@ export const Header: React.FC<HeaderProps> = ({
             Facilities & 3T MRI
           </button>
           <button 
-            onClick={() => handleNavClick('reports')}
+            onClick={() => handleNavClick('process')}
             className="hover:text-[#F37920] transition-colors py-1 cursor-pointer flex items-center gap-1.5"
           >
-            <FileText className="w-4 h-4 text-[#0066B2]" />
-            <span>Download Report</span>
+            <Clock className="w-4 h-4 text-[#F37920]" />
+            <span>How It Works</span>
           </button>
           <button 
             onClick={() => handleNavClick('centers')}
@@ -172,10 +172,10 @@ export const Header: React.FC<HeaderProps> = ({
             3T MRI & Laboratory Technology
           </button>
           <button
-            onClick={() => handleNavClick('reports')}
+            onClick={() => handleNavClick('process')}
             className="block w-full text-left px-3 py-2 rounded-md text-sm font-semibold text-slate-700 hover:bg-orange-50 hover:text-[#F37920]"
           >
-            Track & Download Report
+            How Nu Health Care Works (4 Steps)
           </button>
           <button
             onClick={() => handleNavClick('centers')}

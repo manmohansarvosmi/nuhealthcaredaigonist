@@ -11,26 +11,26 @@ export const TestimonialsAndFaq: React.FC = () => {
 
   const reviews = [
     {
-      name: 'Nandini Swaminathan',
-      location: 'Koramangala, Bengaluru',
-      test: 'Nu Executive Platinum Master Health Check',
-      comment: 'Booked home collection for my elderly parents. The Nu Health Care phlebotomist arrived right on time at 7:00 AM with sealed single-use needles and cold ice gel packs. The reports arrived by 6 PM on WhatsApp with clear reference charts.',
+      name: 'Nandini Sharma',
+      location: 'Subhash Ganj, Dabra',
+      test: 'Nu Complete Master Health Checkup',
+      comment: 'Booked home sample collection for my elderly parents in Dabra. The Nu Health Care phlebotomist arrived right on time at 7:00 AM with sterile equipment. The reports arrived by evening on WhatsApp with clear reference charts.',
       rating: 5,
       date: 'Tested September 2026'
     },
     {
       name: 'Dr. Vikramaditya Rao',
-      location: 'Consultant Orthopedic Surgeon',
-      test: '3.0T MRI Knee & Spine Scans',
-      comment: 'As an orthopedic surgeon, image clarity is critical for surgical planning. The 3.0 Tesla Silent MRI at Nu Health Care Diagnostic provides immaculate sub-millimeter cartilage contrast with zero motion artifacts. Their turnaround time is the fastest in the city.',
+      location: 'Consulting Physician, Civil Hospital Road',
+      test: 'Ultrasound & Advanced Pathology',
+      comment: 'Diagnostic accuracy is critical for clinical decisions. Group\'s of Nu Health Care Diagnostic in Dabra provides immaculate lab precision and digital imaging. Their report turnaround time is exceptionally fast and reliable.',
       rating: 5,
       date: 'Verified Clinician Review'
     },
     {
-      name: 'Pooja K. Hegde',
-      location: 'Indiranagar, Bengaluru',
+      name: 'Pooja Gupta',
+      location: 'Dabra, Gwalior',
       test: 'Nu Women Hormone Panel & Vitamin Profile',
-      comment: 'The online portal is seamless. I logged in with my mobile number and could immediately download the QR-verified PDF. It highlighted my low Vitamin D and borderline thyroid in a clear graphic format that my physician appreciated.',
+      comment: 'The online portal and WhatsApp updates are seamless. I got my test done right near Civil Hospital and could immediately download the verified PDF report.',
       rating: 5,
       date: 'Tested August 2026'
     }

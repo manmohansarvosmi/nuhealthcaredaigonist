@@ -171,7 +171,7 @@ export const Hero: React.FC<HeroProps> = ({
                     </>
                   ) : (
                     <div className="p-6 text-center text-xs text-slate-500">
-                      No exact match for "{searchQuery}". Call our 24x7 helpline (080) 4920-8800 or browse catalog below.
+                      No exact match for "{searchQuery}". Call our 24x7 helpline 096176 59936 or browse catalog below.
                     </div>
                   )}
                 </div>
@@ -204,13 +204,13 @@ export const Hero: React.FC<HeroProps> = ({
 
               <button
                 onClick={onGoToReports}
-                className="p-3.5 bg-white hover:bg-blue-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-[#0066B2]/60 hover:shadow-xs group cursor-pointer"
+                className="p-3.5 bg-white hover:bg-emerald-50/50 border border-slate-200 rounded-xl text-left transition-all hover:border-emerald-500/60 hover:shadow-xs group cursor-pointer"
               >
-                <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#0066B2] flex items-center justify-center mb-2 group-hover:bg-[#0066B2] group-hover:text-white transition-colors">
-                  <FileText className="w-4 h-4" />
+                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                  <Clock className="w-4 h-4" />
                 </div>
-                <div className="text-xs font-bold text-slate-900">View Reports</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">Instant online PDF</div>
+                <div className="text-xs font-bold text-slate-900">How It Works</div>
+                <div className="text-[11px] text-slate-500 mt-0.5">4-step easy process</div>
               </button>
 
               <button

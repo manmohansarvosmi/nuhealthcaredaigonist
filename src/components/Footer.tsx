@@ -38,17 +38,17 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="space-y-1.5 pt-2 font-mono text-[11px] text-slate-300">
               <div className="flex items-center gap-2">
                 <Phone className="w-3.5 h-3.5 text-[#D32F2F]" />
-                <a href="tel:+918049208800" className="hover:text-white transition-colors font-bold">
-                  24x7 Helpline: +91 (080) 4920-8800
+                <a href="tel:+919617659936" className="hover:text-white transition-colors font-bold">
+                  24x7 Helpline: 096176 59936
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-3.5 h-3.5 text-[#F37920]" />
                 <span>care@nuhealthcarediagnostic.com</span>
               </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-3.5 h-3.5 text-[#0066B2]" />
-                <span>Nu Health Care Tower, Koramangala, Bengaluru 560034</span>
+              <div className="flex items-start gap-2">
+                <MapPin className="w-3.5 h-3.5 text-[#0066B2] shrink-0 mt-0.5" />
+                <span>In State Bank of India Building, Near Civil Hospital, Subhash Ganj, Dabra, Madhya Pradesh 475110</span>
               </div>
             </div>
           </div>
@@ -191,10 +191,10 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               <li>
                 <button 
-                  onClick={() => onSelectNav('reports')}
+                  onClick={() => onSelectNav('process')}
                   className="hover:text-[#F37920] transition-colors text-left"
                 >
-                  Track & Download Report
+                  How It Works (4-Step Process)
                 </button>
               </li>
               <li>

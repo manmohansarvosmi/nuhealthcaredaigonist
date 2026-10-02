@@ -9,7 +9,7 @@ import { Hero } from './components/Hero';
 import { FacilitiesBento } from './components/FacilitiesBento';
 import { TestCatalog } from './components/TestCatalog';
 import { HealthPackages } from './components/HealthPackages';
-import { ReportTracker } from './components/ReportTracker';
+import { HowItWorks } from './components/HowItWorks';
 import { DoctorsTeam } from './components/DoctorsTeam';
 import { BranchesSection } from './components/BranchesSection';
 import { TestimonialsAndFaq } from './components/TestimonialsAndFaq';
@@ -134,7 +134,7 @@ export default function App() {
             setIsHomeBookingOpen(true);
           }}
           onOpenPrescription={() => setIsPrescriptionOpen(true)}
-          onGoToReports={() => scrollToSection('reports')}
+          onGoToReports={() => scrollToSection('process')}
           onExploreTests={() => scrollToSection('tests')}
         />
 
@@ -161,8 +161,15 @@ export default function App() {
           onBookPackageDirect={handleBookPackageDirect}
         />
 
-        {/* Online Reports Portal & Patient Record Viewer */}
-        <ReportTracker />
+        {/* How It Works (4-Step Process) & Why Choose Nu Health Care */}
+        <HowItWorks
+          onOpenHomeBooking={() => {
+            setSelectedBookingContext(undefined);
+            setIsHomeBookingOpen(true);
+          }}
+          onOpenPrescription={() => setIsPrescriptionOpen(true)}
+          onExploreTests={() => scrollToSection('tests')}
+        />
 
         {/* Senior Medical Leadership & Pathologists */}
         <DoctorsTeam />
